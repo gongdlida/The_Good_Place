@@ -1,0 +1,9 @@
+{
+  "extends": "@riad/tsconfig/base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "build"
+  },
+  "include": ["**/*.ts", "config.js"],
+  "exclude": ["dist", "build", "node_modules"]
+}

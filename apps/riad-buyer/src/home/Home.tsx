@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 // import reactLogo from './assets/react.svg';
-import { Carousel } from '@/main/elements/Carousel';
+import { Carousel } from '@/home/elements/Carousel';
 
 import Layout from '@/layout/Layout';
 
-function App() {
+function Main() {
   const imgs = useMemo(
     () =>
       Array(4)
@@ -19,4 +19,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;

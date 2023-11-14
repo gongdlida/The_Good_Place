@@ -8,7 +8,7 @@ export const GNB = () => {
   return (
     <header>
       <Sidebar {...{ isOpen, setIsOpen }} />
-      <div className='border-grey-500 fixed top-0 z-10 flex w-full justify-between border-b-[1px] bg-white px-20 py-5'>
+      <div className='border-grey-300 fixed top-0 z-10 flex w-full justify-between border-b-[1px] bg-white px-20 py-5'>
         <div className='items-centerr relative flex w-full justify-center'>
           <button
             className='absolute left-0 h-10'

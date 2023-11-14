@@ -1,6 +1,7 @@
 {
   "extends": "@riad/vite/tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }

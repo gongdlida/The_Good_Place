@@ -1,16 +1,21 @@
+const plugin = require('tailwindcss/plugin');
+
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [],
-  theme: {
-    extend: {},
-  },
-  // plugins: [
-  //   ({ addComponents }) => {
-  //     addComponents({
-  //       plugins: [],
-  //     });
-  //   },
-  // ],
+  plugins: [
+    ({ addComponents }) => {
+      addComponents({
+        '.btn-xl-submit-filled': {
+          '@apply rounded bg-orange-300 px-2.5 py-4 text-white text-L/Bold': {},
+        },
+        '.btn-xl-submit-outlined': {
+          '@apply rounded bg-white py-4 border-orange-300 text-L/Bold text-orange-500 border':
+            {},
+        },
+      });
+    },
+  ],
   theme: {
     screens: {
       xl: { max: '1440px' },

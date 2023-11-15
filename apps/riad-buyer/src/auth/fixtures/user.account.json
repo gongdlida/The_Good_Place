@@ -4,19 +4,22 @@
       "email": "felicette0@gamil.com",
       "password": "1q2w3e4r!",
       "name": "cat",
-      "number": "01011112222"
+      "phoneNumber": "010-1111-2222",
+      "businessNumber": "121-12-10111"
     },
     {
       "email": "test0@naver.com",
       "password": "1234qwer!",
       "name": "dog",
-      "number": "01022223333"
+      "phoneNumber": "010-2222-3333",
+      "businessNumber": "111-21-10111"
     },
     {
       "email": "rhino@gamil.com",
       "password": "1q2w3e4r!",
       "name": "rihno",
-      "number": "01033334444"
+      "phoneNumber": "010-3333-4444",
+      "businessNumber": "101-03-102211"
     }
   ]
 }

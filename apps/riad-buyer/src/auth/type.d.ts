@@ -11,5 +11,24 @@ type TUserInfo = {
   email: string;
   name: string;
   password: string;
-  number: string;
+  phoneNumber: string;
+  businessNumber: string;
+};
+
+type TSignUpInfo = {
+  email: string;
+  name: string;
+  password: string;
+  passwordChecked: string;
+  phoneNumber: string;
+  businessNumber: string;
+};
+
+type TSignUpPayload = {
+  email: string;
+  name: string;
+  password: string;
+  passwordChecked?: string;
+  phoneNumber: string;
+  businessNumber: string;
 };

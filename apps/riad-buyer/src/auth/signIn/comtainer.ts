@@ -1,6 +1,5 @@
 import type { UseFormSetError, UseFormSetFocus, UseFormSetValue } from 'react-hook-form';
-import { NOTIFICATION_MESSAGE } from '@/auth/constants';
-import { NavigateFunction } from 'react-router-dom';
+import type { NavigateFunction } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
 import { signIn } from '@/auth/signIn/api';
 
@@ -11,12 +10,12 @@ export const _signIn = async (
   setFocus: UseFormSetFocus<TSignInInfo>,
   navigator: NavigateFunction,
 ) => {
-  const response = await signIn(params);
-  if (response.status === 'ERROR') {
+  const res = await signIn(params);
+  if (res.status === 'ERROR') {
     setFocus('email');
     ['email', 'password'].forEach((key) => setValue(key as keyof TSignInInfo, ''));
 
-    return setError('email', { message: NOTIFICATION_MESSAGE.invalidAccount });
+    return setError('email', { message: res.msg });
   }
   return navigator(PATH.MAIN);
 };

@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { ReactSVG } from 'react-svg';
+
 import { Sidebar } from '@/layout/elements';
 import { Link } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
+
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
+import { isTruthy } from '@/util/isTruthy';
 
 export const GNB = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +30,7 @@ export const GNB = () => {
           <p className='text-3XL/Bold'>여기는 로고자리 입니다.</p>
 
           <div className='absolute right-0'>
-            {userInfo !== null ? (
+            {isTruthy(userInfo) ? (
               <button>
                 <div className='flex flex-col'>
                   <div className='bg-grey-50 flex justify-center rounded-full border-[1px]'>

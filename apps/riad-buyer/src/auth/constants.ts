@@ -1,7 +1,7 @@
 export const NOTIFICATION_MESSAGE = {
   emptyEmail: '이메일을 입력해주세요.',
   emtpyPassword: '비밀번호를 입력해주세요.',
-  invalidAccount: '이메일 또는 비밀번호가 잘못되었습니다. 다시 시도해주세요.',
+  invalidAccount: '이메일 혹은 비밀번호가 잘못되었습니다.',
   emtpyConfirmPassword: '비밀번호 확인란을 입력해주세요',
   emptyPhoneNumber: '휴대폰 번호를 입력해주세요',
   emptyPhoneVerify: '휴대폰 인증을 완료해주세요',
@@ -12,4 +12,10 @@ export const NOTIFICATION_MESSAGE = {
   invalidPhone: '올바른 휴대폰번호를 입력해주세요.',
   successChangePassword: '비밀번호가 정상적으로 변경되었어요.',
   invalidPasswordType: '숫자, 특수문자, 영문 포함 8자리 이상으로 입력해주세요.',
+};
+
+export const REGEX = {
+  eamil:
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+  password: /^.{8,}$/,
 };

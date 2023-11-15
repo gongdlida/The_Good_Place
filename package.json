@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buyer:setting": "pnpm run --filter=vite --filter=riad-buyer preset",
+    "buyer:setting": "pnpm run --filter=riad-buyer preset",
     "buyer": "pnpm buyer:setting && pnpm run --filter=riad-buyer dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"

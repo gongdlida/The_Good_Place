@@ -1,17 +1,13 @@
 import { NOTIFICATION_MESSAGE } from '@/auth/constants';
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
-
-export const URL = {
-  SIGN_IN: 'get_user_info',
-  SIGN_UP: 'register_user_info',
-};
+import { URL } from '@/api/constants';
 
 const checkUserInfo = async (
   url: string,
   params: TSignInInfo,
 ): Promise<TResponseData> => {
-  const { users } = useSessionStorage.getItem(url) as TUserInfoResponse;
+  const { users } = useSessionStorage.getItem(CACHING_KEY.ALL_USERS) as TUserInfoResponse;
   const { email, password } = params;
   const userData = users.find((userInfo) => userInfo.email === email);
 

@@ -1,17 +1,24 @@
 import { InputFiledChip } from '@/components/inputFieldChip/AlertIcon';
 import { ICON_STATUS } from '@/components/inputFieldChip/type';
+
 import { AuthLayout } from '@/layout/AuthLayout';
 import { useForm } from 'react-hook-form';
 import { NOTIFICATION_MESSAGE } from '@/auth/constants';
 import { Link, useNavigate } from 'react-router-dom';
+
+import { REGEX } from '@/auth/constants';
 import { PATH } from '@/routes/constants';
 import { _signIn } from '@/auth/signIn/comtainer';
+
 export const SignIn = () => {
   const navigator = useNavigate();
+
   const {
     register,
     handleSubmit,
     setError,
+    setValue,
+    setFocus,
     formState: { errors },
   } = useForm<TSignInInfo>({
     mode: 'onChange',
@@ -23,7 +30,9 @@ export const SignIn = () => {
         <p className='text-3XL/Medium'>로그인</p>
         <form
           className='w-full space-y-8'
-          onSubmit={handleSubmit((userInfo) => _signIn(userInfo, setError, navigator))}
+          onSubmit={handleSubmit((userInfo) =>
+            _signIn(userInfo, setError, setValue, setFocus, navigator),
+          )}
         >
           <section
             id='account_info'
@@ -39,8 +48,7 @@ export const SignIn = () => {
                   {...register('email', {
                     required: NOTIFICATION_MESSAGE.emptyEmail,
                     pattern: {
-                      value:
-                        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      value: REGEX.eamil,
                       message: NOTIFICATION_MESSAGE.invalidEmail,
                     },
                   })}
@@ -68,7 +76,7 @@ export const SignIn = () => {
                     required: '비밀번호를 입력해주세요.',
                     pattern: {
                       // : 모든 글자 8자리 이상 입력
-                      value: /^.{8,}$/,
+                      value: REGEX.password,
                       message: '비밀번호는 8자리 이상 입력해주세요.',
                     },
                   })}
@@ -85,9 +93,10 @@ export const SignIn = () => {
           </section>
 
           <div className='flex w-full flex-col gap-5'>
-            <button type='submit' className='btn-xl-submit-filled w-full '>
+            <button type='submit' className='btn-xl-submit-filled w-full'>
               로그인
             </button>
+
             <Link to={PATH.SIGN_UP}>
               <button type='submit' className='btn-xl-submit-outlined w-full'>
                 회원가입 하기

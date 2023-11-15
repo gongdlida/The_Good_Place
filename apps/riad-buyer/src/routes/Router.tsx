@@ -1,17 +1,19 @@
 import Home from '@/home/Home';
+
+import Auth from '@/auth/Auth';
 import { SignIn, SignUp } from '@/auth';
 
 import { useRoutes } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
 import { useEffect } from 'react';
 import { useSessionStorage } from '@/api/useSessionStorage';
-import { URL } from '@/auth/signIn/api';
 import user_info from '@/auth/fixtures/user.account.json';
+import { CACHING_KEY } from '@/api/constants';
 
 const Router = () => {
   useEffect(() => {
     // 로그인 구현을 위한 데이터 삽입
-    useSessionStorage.setItem(URL.SIGN_UP, user_info);
+    useSessionStorage.setItem(CACHING_KEY.ALL_USERS, user_info);
   }, []);
 
   const elements = useRoutes([
@@ -20,8 +22,12 @@ const Router = () => {
       element: <Home />,
     },
     {
-      path: PATH.SIGN_IN,
-      element: <SignIn />,
+      path: PATH.MAIN,
+      element: <Auth />,
+      children: [
+        { path: PATH.SIGN_IN, element: <SignIn /> },
+        { path: PATH.SIGN_UP, element: <SignUp /> },
+      ],
     },
     {
       path: PATH.SIGN_UP,

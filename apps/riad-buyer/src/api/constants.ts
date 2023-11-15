@@ -5,4 +5,5 @@ export const URL = {
 
 export const CACHING_KEY = {
   USER_INFO: 'user_info',
+  ALL_USERS: 'all_users',
 };

@@ -7,7 +7,7 @@ import { PATH } from '@/routes/constants';
 
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
-import { isTruthy } from '@/util/isTruthy';
+import isTruthy from '@/util/isTruthy';
 
 export const GNB = () => {
   const [isOpen, setIsOpen] = useState(false);

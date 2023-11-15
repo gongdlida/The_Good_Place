@@ -2,7 +2,7 @@ import { signUp } from '@/auth/signUp/api';
 import { PATH } from '@/routes/constants';
 import type { UseFormSetError, UseFormSetFocus } from 'react-hook-form';
 import type { NavigateFunction } from 'react-router-dom';
-import { isTruthy } from '@/util/isTruthy';
+import isTruthy from '@/util/isTruthy';
 
 export const checkFilledForm = (params: TSignUpInfo) => {
   return Object.keys(params).every((key) => {

@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { useSessionStorage } from '@/api/useSessionStorage';
 import user_info from '@/auth/fixtures/user.account.json';
 import { CACHING_KEY } from '@/api/constants';
+import { CatalogList } from '@/catalog/catalogList/Catalog';
 
 const Router = () => {
   useEffect(() => {
@@ -30,8 +31,8 @@ const Router = () => {
       ],
     },
     {
-      path: PATH.SIGN_UP,
-      element: <SignUp />,
+      path: PATH.CATALOG_LIST,
+      element: <CatalogList />,
     },
   ]);
   return elements;

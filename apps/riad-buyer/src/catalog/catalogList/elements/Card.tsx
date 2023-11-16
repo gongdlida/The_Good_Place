@@ -16,16 +16,13 @@ export const Card = ({ catalog }: ICard) => {
 
   return (
     <Link to={PATH.CATALOG_LIST}>
-      <div
-        id='catalog_card_frame'
-        className='flex w-fit flex-col gap-3'
-        onMouseOut={() => setTabDisplay('hidden')}
-        onMouseOver={() => setTabDisplay('flex')}
-        onClick={() => {
-          console.log('hi');
-        }}
-      >
-        <div id='catalog_img' className='relative flex items-center'>
+      <div id='catalog_card_frame' className='flex w-fit flex-col gap-3'>
+        <div
+          id='catalog_img'
+          className='relative flex items-center'
+          onMouseOut={() => setTabDisplay('hidden')}
+          onMouseOver={() => setTabDisplay('flex')}
+        >
           <img
             className='h-[300px] w-[310px] rounded-lg object-cover'
             src={images[currentImage]}

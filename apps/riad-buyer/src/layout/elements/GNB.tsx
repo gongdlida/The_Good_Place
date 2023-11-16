@@ -7,7 +7,7 @@ import { PATH } from '@/routes/constants';
 
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
-import { isTruthy } from '@/util/isTruthy';
+import isTruthy from '@/util/isTruthy';
 
 export const GNB = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +16,7 @@ export const GNB = () => {
   return (
     <header className='border-grey-300 fixed top-0 z-10 w-full border-b-[1px] bg-white'>
       <Sidebar {...{ isOpen, setIsOpen }} />
-      <nav className='m-auto flex w-full max-w-[1060px]  justify-between py-5'>
+      <nav className='m-auto flex w-full max-w-[1330px]  justify-between py-5'>
         <div className='items-centerr relative flex w-full justify-center'>
           <button
             className='absolute left-0 h-10'

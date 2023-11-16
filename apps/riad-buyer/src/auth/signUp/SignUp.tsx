@@ -27,15 +27,8 @@ export const SignUp = () => {
   });
 
   return (
-    <section
-      //   autoComplete='off'
-      className='w-full space-y-8'
-      //   onSubmit={handleSubmit((userInfo, event) => {
-      //     event?.preventDefault();
-
-      //   })}
-    >
-      <div id='sign_up_info' className='flex w-full flex-col justify-start space-y-8'>
+    <section className='w-full space-y-8'>
+      <div id='sign_up_info' className='flex w-full flex-col justify-start space-y-4'>
         <div id='name_input' className='inputCustom-group'>
           <label className='inputCustom-label'>이름</label>
           <div className='inputCustom-textbox-wrap'>

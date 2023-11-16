@@ -1,10 +1,13 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, MouseEvent } from 'react';
 
 export const handleImages = (
   setCurrentImage: Dispatch<SetStateAction<number>>,
   images: string[],
   type: 'next' | 'prev',
+  event: MouseEvent,
 ) => {
+  event.stopPropagation();
+  event.preventDefault();
   type === 'next'
     ? setCurrentImage((prevImage) => (prevImage + 1) % images.length)
     : setCurrentImage((prevImage) => (prevImage - 1 + images.length) % images.length);

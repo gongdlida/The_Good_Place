@@ -15,9 +15,13 @@ type TCatalogInfo = {
   images: string[];
 };
 
-type TCatalogList = TCatalogInfo[];
+type TCatalogList = TCatalogInfo[] | null;
 
 type TCatalogFetchStatus = {
   isLoading: boolean;
   error: string | null;
 };
+
+type TPagination = { bundle: number; page: number };
+
+type TFilterType = Pick<TCatalogInfo, 'category' | 'grade' | 'roomType' | 'price'>;

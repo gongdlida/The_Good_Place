@@ -17,9 +17,11 @@ const Auth = () => {
       <div className='flex w-full flex-col items-center space-y-8'>
         <p className='text-3XL/Medium'>{title}</p>
         <Outlet />
-        <Link className='absolute bottom-10' to={PATH.MAIN}>
-          <p className='text-XL/Bold'>로고가 들어감</p>
-        </Link>
+        {[PATH.SIGN_IN].includes(pathname) && (
+          <Link className='absolute bottom-10' to={PATH.MAIN}>
+            <p className='text-XL/Bold'>로고가 들어감</p>
+          </Link>
+        )}
       </div>
     </AuthLayout>
   );

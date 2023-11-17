@@ -33,7 +33,7 @@ export const FilterModal = () => {
         <footer className='border-grey-300 w-[780px] border-t-[1px]'>
           <div className='flex items-center justify-between px-6 py-4'>
             <button>
-              <p className='text-L/Medium underline'>clear All</p>
+              <p className='text-L/Medium underline'>Clear All</p>
             </button>
             <button className='btn-xl-submit-filled rounded-lg bg-orange-500 py-3'>
               <p className='text-L/Medium'>Show {`700`} Places</p>

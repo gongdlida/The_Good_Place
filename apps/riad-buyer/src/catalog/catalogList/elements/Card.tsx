@@ -75,7 +75,18 @@ export const Card = ({ catalog }: ICard) => {
           </div>
         </div>
         <div id='catalog_info' className='text-M/Regular flex flex-col'>
-          <p className='w-[300px] truncate'>{catalog.hotel}</p>
+          <div className='flex justify-between'>
+            <p className='w-[270px] truncate'>{catalog.hotel}</p>
+            <div className='flex items-center gap-0.5'>
+              <ReactSVG
+                src='/assets/icons/Star.svg'
+                beforeInjection={(svg) =>
+                  svg.setAttribute('class', 'fill-grey-600 w-4 h-4')
+                }
+              />
+              <p>{catalog.grade}</p>
+            </div>
+          </div>
           <p className='w-[300px] truncate'>{catalog.productName}</p>
           <p>{catalog.roomType}</p>
           <p className='text-M/Bold'>

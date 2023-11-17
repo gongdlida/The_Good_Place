@@ -8,7 +8,7 @@ export const filledOption = (options: TFilterType) =>
 export const _getCatalogList = async (
   pagination: TPagination,
   setCatalogList: (catalogList: TCatalogList) => void,
-  setPrintLis: (updatedList: TCatalogList) => void,
+  setPrintList: (updatedList: TCatalogList) => void,
   option: TFilterType,
 ) => {
   const res = await getCatalogList();
@@ -17,7 +17,7 @@ export const _getCatalogList = async (
 
   if (!res) return res; //에러
 
-  let list = res.data;
+  let list = structuredClone(res.data);
 
   if (isTruthy(_option)) {
     list = filterCatalogList(option, res.data!);
@@ -25,7 +25,7 @@ export const _getCatalogList = async (
     setCatalogList(res.data);
   }
 
-  setPrintLis(list!.splice(0, pagination.bundle));
+  setPrintList(list!.splice(0, pagination.bundle));
 };
 
 const filterCatalogList = (option: TFilterType, catalogList: TCatalogInfo[]) => {

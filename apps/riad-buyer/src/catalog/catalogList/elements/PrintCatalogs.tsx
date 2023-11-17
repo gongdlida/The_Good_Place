@@ -1,24 +1,31 @@
 import { catalogStore } from '@/catalog/store';
-import { useEffect } from 'react';
+import useDidMountEffect from '@/hooks/useDidMountEffect';
 import { updateByPagination } from '@/catalog/catalogList/container';
 
 import { Card, Filter } from '@/catalog/catalogList/elements';
+import Pagination from '@/components/pagination/Pagination';
 
 export const PrintCatalogs = () => {
-  const { setPrintList, catalogList, pagination, option, printList, isModalOpen } =
-    catalogStore();
+  const {
+    setPrintList,
+    catalogList,
+    pagination,
+    option,
+    printList,
+    isModalOpen,
+    setPagination,
+  } = catalogStore();
 
-  useEffect(() => {
-    if (pagination.page > 1) {
-      updateByPagination(pagination, catalogList!, setPrintList);
-    }
-  }, [option, pagination.page]);
+  useDidMountEffect(() => {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    updateByPagination(pagination, catalogList!, setPrintList);
+  }, [pagination.page]);
 
   return (
     <article id='catalog_list' className='flex w-full flex-col items-center'>
       <Filter />
       <section
-        className={`w-[1330px] ${
+        className={`flex w-[1330px] flex-col items-center ${
           isModalOpen ? 'h-[calc(100vh-162px)] overflow-hidden' : ''
         }`}
       >
@@ -27,8 +34,13 @@ export const PrintCatalogs = () => {
             return <Card key={catalog.Id} catalog={catalog} />;
           })}
         </div>
+        <Pagination
+          total={catalogList!.length}
+          page={pagination.page}
+          limit={pagination.bundle}
+          setParams={(page: number) => setPagination(page)}
+        />
       </section>
     </article>
   );
 };
-//이미지, 호텔명, 상품명, 등급, 룸 타입, 가격

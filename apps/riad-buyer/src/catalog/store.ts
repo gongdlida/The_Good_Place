@@ -10,7 +10,7 @@ interface ICatalogStore {
   // modal handler
   isModalOpen: boolean;
   setIsModalOpen: (param: boolean) => void;
-
+  setPagination: (page: number) => void;
   setCatalogList: (catalogList: TCatalogList) => void;
   setPrintList: (updatedList: TCatalogList) => void;
   setOption: (key: keyof TFilterType, value: TFilterType[keyof TFilterType]) => void;
@@ -22,6 +22,10 @@ export const catalogStore = create<ICatalogStore>((set, get) => ({
   fetchStatus: { isLoading: false, error: null },
   printList: null,
   pagination: { bundle: 20, page: 1 },
+  setPagination: (page) => {
+    const { pagination } = get();
+    set({ pagination: Object.assign({}, pagination, { page }) });
+  },
   option: { category: '', grade: 0, roomType: '', price: '' },
 
   isModalOpen: false,

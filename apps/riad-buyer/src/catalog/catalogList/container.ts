@@ -2,25 +2,25 @@ import type { Dispatch, SetStateAction, MouseEvent } from 'react';
 import { getCatalogList } from '@/catalog/api';
 import isTruthy from '@/util/isTruthy';
 
-export const filledOption = (options: TFilterType) =>
-  Object.entries(options).filter((option) => isTruthy(option[1]));
+export const filledOption = (options: TFilterType) => [];
+// Object.entries(options).filter((filterOptions) => isTruthy(filterOptions[1]));
 
 export const _getCatalogList = async (
   pagination: TPagination,
   setCatalogList: (catalogList: TCatalogList) => void,
   setPrintList: (updatedList: TCatalogList) => void,
-  option: TFilterType,
+  filterOptions: TFilterType,
 ) => {
   const res = await getCatalogList();
 
-  const _option = filledOption(option);
+  const _option = filledOption(filterOptions);
 
   if (!res) return res; //에러
 
   let list = structuredClone(res.data);
 
   if (isTruthy(_option)) {
-    list = filterCatalogList(option, res.data!);
+    list = filterCatalogList(filterOptions, list!);
   } else {
     setCatalogList(res.data);
   }
@@ -28,8 +28,8 @@ export const _getCatalogList = async (
   setPrintList(list!.splice(0, pagination.bundle));
 };
 
-const filterCatalogList = (option: TFilterType, catalogList: TCatalogInfo[]) => {
-  const _option = filledOption(option);
+const filterCatalogList = (filterOptions: TFilterType, catalogList: TCatalogInfo[]) => {
+  const _option = filledOption(filterOptions);
   if (isTruthy(_option) === false) return catalogList;
 
   const _catalogList = structuredClone(catalogList) as TCatalogInfo[];
@@ -76,4 +76,36 @@ export const updateByPagination = (
 
   const table = _catalogList.splice(from, to);
   setPrintList(table);
+};
+
+export const updateFilteredOptions = (
+  filterOptions: TFilterType,
+  setFilterOptions: (options: TFilterType) => void,
+  newOption: { key: keyof TFilterType; value: TFilterType[keyof TFilterType] },
+) => {
+  const _ftOptions = structuredClone(filterOptions);
+  const { key, value } = newOption;
+
+  switch (key) {
+    case 'category': {
+      _ftOptions.category = value as TFilterType['category'];
+      break;
+    }
+    case 'grade': {
+      _ftOptions.grade = value as TFilterType['grade'];
+      break;
+    }
+    case 'price': {
+      _ftOptions.price = value as TFilterType['price'];
+      break;
+    }
+    case 'roomType': {
+      _ftOptions.roomType = value as TFilterType['roomType'];
+      break;
+    }
+    default:
+      throw new Error('존재하지 않는 필터옵션 입니다.');
+  }
+
+  setFilterOptions(_ftOptions);
 };

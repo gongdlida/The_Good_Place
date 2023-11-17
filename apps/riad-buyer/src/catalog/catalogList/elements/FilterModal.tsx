@@ -1,6 +1,7 @@
 import { Modal } from '@/components/Modal';
 import { ReactSVG } from 'react-svg';
 import { catalogStore } from '@/catalog/store';
+import { Categories } from '@/catalog/catalogList/elements';
 
 export const FilterModal = () => {
   const { isModalOpen, setIsModalOpen } = catalogStore();
@@ -25,8 +26,8 @@ export const FilterModal = () => {
         </header>
 
         <main>
-          <div className='max-h-[700px] overflow-y-scroll'>
-            <div className='h-[1000px]' />
+          <div className='max-h-[700px] max-w-[780px] overflow-hidden'>
+            <Categories />
           </div>
         </main>
 

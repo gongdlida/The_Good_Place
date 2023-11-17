@@ -10,7 +10,7 @@ export const PrintCatalogs = () => {
     setPrintList,
     catalogList,
     pagination,
-    option,
+    filterOptions,
     printList,
     isModalOpen,
     setPagination,

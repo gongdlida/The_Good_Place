@@ -1,11 +1,14 @@
 import { catalogStore } from '@/catalog/store';
 import { CATEGORY_TYPE } from '@/catalog/constants';
 import { ReactSVG } from 'react-svg';
-import { firstLetterToUpper } from '@/catalog/catalogList/container';
+import {
+  firstLetterToUpper,
+  updateFilteredOptions,
+} from '@/catalog/catalogList/container';
 import { FilterModal } from '@/catalog/catalogList/elements';
 
 export const Filter = () => {
-  const { setOption, setIsModalOpen } = catalogStore();
+  const { setFilterOptions, setIsModalOpen, filterOptions } = catalogStore();
 
   return (
     <article className='border-grey-300 sticky top-[81px] z-30 flex w-full justify-center border-b-[1px] bg-white'>
@@ -16,7 +19,12 @@ export const Filter = () => {
             <button
               key={category}
               className='flex flex-col items-center'
-              onClick={() => setOption('category', category)}
+              onClick={() =>
+                updateFilteredOptions(filterOptions, setFilterOptions, {
+                  key: 'category',
+                  value: category as TFilterType['category'],
+                })
+              }
             >
               <ReactSVG
                 src='/assets/icons/Home.svg'

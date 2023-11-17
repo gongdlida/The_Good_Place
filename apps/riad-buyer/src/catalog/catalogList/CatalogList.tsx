@@ -6,13 +6,13 @@ import { Spinner } from '@/components';
 import { _getCatalogList } from '@/catalog/catalogList/container';
 
 export const CatalogList = () => {
-  const { catalogList, setCatalogList, pagination, setPrintList, option } =
+  const { catalogList, setCatalogList, pagination, setPrintList, filterOptions } =
     catalogStore();
   // 캐싱되어야 하는 항목
 
   useEffect(() => {
-    _getCatalogList(pagination, setCatalogList, setPrintList, option);
-  }, [option.category]);
+    _getCatalogList(pagination, setCatalogList, setPrintList, filterOptions);
+  }, [filterOptions.category]);
 
   return (
     <Layout>

@@ -24,7 +24,12 @@ type TCatalogFetchStatus = {
 
 type TPagination = { bundle: number; page: number };
 
-type TFilterType = Pick<TCatalogInfo, 'category' | 'grade' | 'roomType' | 'price'>;
+type TFilterType = {
+  category: Pick<TCatalogInfo, 'category'> | '';
+  grade: Pick<TCatalogInfo, 'grade'>[] | null;
+  roomType: Pick<TCatalogInfo, 'roomType'>[] | null;
+  price: { min: number; max: number };
+};
 
 type TCategory = 'pension' | 'hotel' | 'hostel' | 'apartment' | 'villa' | 'guesthouse';
 

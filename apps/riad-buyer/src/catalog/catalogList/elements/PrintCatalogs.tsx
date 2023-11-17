@@ -1,18 +1,27 @@
 import { catalogStore } from '@/catalog/store';
-import { Fragment, useEffect } from 'react';
-import { updateByPagination } from '@/catalog/catalogList/elements/container';
-import { Card } from '@/catalog/catalogList/elements';
+import { useEffect } from 'react';
+import { updateByPagination } from '@/catalog/catalogList/container';
+
+import { Card, Filter } from '@/catalog/catalogList/elements';
 
 export const PrintCatalogs = () => {
-  const { setPrintList, catalogList, pagination, printList } = catalogStore();
+  const { setPrintList, catalogList, pagination, option, printList, isModalOpen } =
+    catalogStore();
 
   useEffect(() => {
-    // updateByPagination(pagination, catalogList!, setPrintList);
-  }, []);
+    if (pagination.page > 1) {
+      updateByPagination(pagination, catalogList!, setPrintList);
+    }
+  }, [option, pagination.page]);
 
   return (
-    <article id='catalog_list' className='flex w-full justify-center'>
-      <section className='w-[1330px]'>
+    <article id='catalog_list' className='flex w-full flex-col items-center'>
+      <Filter />
+      <section
+        className={`w-[1330px] ${
+          isModalOpen ? 'h-[calc(100vh-162px)] overflow-hidden' : ''
+        }`}
+      >
         <div className='flex grow flex-wrap gap-[30px] pt-[30px]'>
           {printList!.map((catalog) => {
             return <Card key={catalog.Id} catalog={catalog} />;

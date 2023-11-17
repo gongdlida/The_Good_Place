@@ -27,7 +27,9 @@ export const GNB = () => {
             <ReactSVG src='/assets/icons/Menu.svg' />
           </button>
 
-          <p className='text-3XL/Bold'>여기는 로고자리 입니다.</p>
+          <Link to={PATH.MAIN}>
+            <p className='text-3XL/Bold'>여기는 로고자리 입니다.</p>
+          </Link>
 
           <div className='absolute right-0'>
             {isTruthy(userInfo) ? (

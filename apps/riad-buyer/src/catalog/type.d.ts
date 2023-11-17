@@ -1,12 +1,12 @@
 type TCatalogInfo = {
   Id: string;
   productName: string;
-  category: string;
-  grade: number;
+  category: TCategory | '';
+  roomType: TRoomType | '';
+  grade: TGrade | 0;
   phone: string;
   email: string;
   address: string;
-  roomType: string;
   price: string;
   currency: string;
   hotel: string;
@@ -25,3 +25,9 @@ type TCatalogFetchStatus = {
 type TPagination = { bundle: number; page: number };
 
 type TFilterType = Pick<TCatalogInfo, 'category' | 'grade' | 'roomType' | 'price'>;
+
+type TCategory = 'pension' | 'hotel' | 'hostel' | 'apartment' | 'villa' | 'guesthouse';
+
+type TGrade = 1 | 2 | 3 | 4 | 5;
+
+type TRoomType = 'double' | 'standard' | 'tween' | 'single' | 'suite' | 'deluxe';

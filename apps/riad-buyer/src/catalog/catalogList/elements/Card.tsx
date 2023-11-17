@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { handleImages } from '@/catalog/catalogList/elements/container';
+import { handleImages } from '@/catalog/catalogList/container';
 import { ReactSVG } from 'react-svg';
 import { Link } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
@@ -78,7 +78,9 @@ export const Card = ({ catalog }: ICard) => {
           <p className='w-[300px] truncate'>{catalog.hotel}</p>
           <p className='w-[300px] truncate'>{catalog.productName}</p>
           <p>{catalog.roomType}</p>
-          <p className='text-M/Bold'>${catalog.price} /박</p>
+          <p className='text-M/Bold'>
+            ${catalog.price} <span className='text-M/Regular'>/ night</span>
+          </p>
         </div>
       </div>
     </Link>

@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useSessionStorage } from '@/api/useSessionStorage';
 import user_info from '@/auth/fixtures/user.account.json';
 import { CACHING_KEY } from '@/api/constants';
-import { CatalogList } from '@/catalog/catalogList/Catalog';
+import { CatalogList } from '@/catalog/catalogList/CatalogList';
 
 const Router = () => {
   useEffect(() => {

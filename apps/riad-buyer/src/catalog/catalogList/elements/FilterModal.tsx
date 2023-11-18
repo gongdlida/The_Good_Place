@@ -1,10 +1,33 @@
 import { Modal } from '@/components/Modal';
 import { ReactSVG } from 'react-svg';
 import { catalogStore } from '@/catalog/store';
-import { Categories } from '@/catalog/catalogList/elements';
+import { SelectButton } from '@/catalog/catalogList/elements';
+import { CATEGORY_TYPE, GRADE, ROOM_TYPE } from '@/catalog/constants';
+import {
+  updateFilteredOptions,
+  _getCatalogList,
+  clearFilteredOptions,
+} from '@/catalog/catalogList/container';
+import { useEffect, useState } from 'react';
 
 export const FilterModal = () => {
-  const { isModalOpen, setIsModalOpen } = catalogStore();
+  const [catalog, setCatalog] = useState<TCatalogStatus>({
+    list: null,
+    printList: null,
+  });
+
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    filterOptions,
+    setFilterOptions,
+    clearFilterOptions,
+  } = catalogStore();
+
+  useEffect(() => {
+    if (catalog.list === null) _getCatalogList(setCatalog, setFilterOptions);
+  }, []);
+
   return (
     <Modal isOpen={isModalOpen}>
       <article className='flex flex-col rounded-lg bg-white'>
@@ -26,18 +49,64 @@ export const FilterModal = () => {
         </header>
 
         <main>
-          <div className='max-h-[700px] max-w-[780px] overflow-hidden'>
-            <Categories />
+          <div className='max-h-[700px] max-w-[780px] divide-y-2 overflow-hidden px-6'>
+            <SelectButton
+              title={'Category Type'}
+              target={filterOptions.category}
+              options={CATEGORY_TYPE}
+              callback={(category: TFilterType['category']) =>
+                updateFilteredOptions(filterOptions, setFilterOptions, {
+                  key: 'category',
+                  value: category as TFilterType['category'],
+                })
+              }
+            />
+            <SelectButton
+              title={'Grade'}
+              target={filterOptions.grade}
+              icon={
+                <ReactSVG
+                  src='/assets/icons/Star.svg'
+                  beforeInjection={(svg) =>
+                    svg.setAttribute('class', 'fill-grey-600 w-4 h-4')
+                  }
+                />
+              }
+              options={GRADE}
+              callback={(grade: TFilterType['grade']) =>
+                updateFilteredOptions(filterOptions, setFilterOptions, {
+                  key: 'grade',
+                  value: grade as TFilterType['grade'],
+                })
+              }
+            />
+            <SelectButton
+              title={'Room Type'}
+              target={filterOptions.roomType}
+              options={ROOM_TYPE}
+              callback={(roomType: TFilterType['roomType']) =>
+                updateFilteredOptions(filterOptions, setFilterOptions, {
+                  key: 'roomType',
+                  value: roomType as TFilterType['roomType'],
+                })
+              }
+            />
           </div>
         </main>
 
         <footer className='border-grey-300 w-[780px] border-t-[1px]'>
           <div className='flex items-center justify-between px-6 py-4'>
-            <button>
+            <button
+              onClick={() =>
+                clearFilteredOptions(clearFilterOptions, setCatalog, setFilterOptions)
+              }
+            >
               <p className='text-L/Medium underline'>Clear All</p>
             </button>
             <button className='btn-xl-submit-filled rounded-lg bg-orange-500 py-3'>
-              <p className='text-L/Medium'>Show {`700`} Places</p>
+              <p className='text-L/Medium'>
+                Show {catalog.printList?.length || 0} Places
+              </p>
             </button>
           </div>
         </footer>

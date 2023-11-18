@@ -6,19 +6,12 @@ import { Card, Filter } from '@/catalog/catalogList/elements';
 import Pagination from '@/components/pagination/Pagination';
 
 export const PrintCatalogs = () => {
-  const {
-    setPrintList,
-    catalogList,
-    pagination,
-    filterOptions,
-    printList,
-    isModalOpen,
-    setPagination,
-  } = catalogStore();
+  const { catalogList, pagination, isModalOpen, setPagination, setCatalogList } =
+    catalogStore();
 
   useDidMountEffect(() => {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-    updateByPagination(pagination, catalogList!, setPrintList);
+    updateByPagination(pagination, catalogList!, setCatalogList);
   }, [pagination.page]);
 
   return (
@@ -30,12 +23,12 @@ export const PrintCatalogs = () => {
         }`}
       >
         <div className='flex grow flex-wrap gap-[30px] pt-[30px]'>
-          {printList!.map((catalog) => {
+          {catalogList.printList!.map((catalog) => {
             return <Card key={catalog.Id} catalog={catalog} />;
           })}
         </div>
         <Pagination
-          total={catalogList!.length}
+          total={catalogList.list!.length}
           page={pagination.page}
           limit={pagination.bundle}
           setParams={(page: number) => setPagination(page)}

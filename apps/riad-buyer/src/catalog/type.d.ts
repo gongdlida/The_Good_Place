@@ -36,3 +36,8 @@ type TCategory = 'pension' | 'hotel' | 'hostel' | 'apartment' | 'villa' | 'guest
 type TGrade = 1 | 2 | 3 | 4 | 5;
 
 type TRoomType = 'double' | 'standard' | 'tween' | 'single' | 'suite' | 'deluxe';
+
+type TCatalogStatus = {
+  list: TCatalogList;
+  printList: TCatalogList;
+};

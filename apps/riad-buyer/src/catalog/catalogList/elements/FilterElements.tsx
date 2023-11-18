@@ -1,32 +1,43 @@
-import { CATEGORY_TYPE } from '@/catalog/constants';
-import { catalogStore } from '@/catalog/store';
-import { updateFilteredOptions } from '@/catalog/catalogList/container';
+import { firstLetterToUpper } from '@/catalog/catalogList/container';
+import type { ReactNode } from 'react';
 
-export const Categories = () => {
-  const { filterOptions, setFilterOptions } = catalogStore();
+interface ISelectButton {
+  title: string;
+  callback: Function;
+  options: string[] | number[];
+  target: any;
+  icon?: ReactNode;
+}
 
+export const SelectButton = ({
+  title,
+  callback,
+  options,
+  target,
+  icon,
+}: ISelectButton) => {
   return (
     <section>
       <div className='flex flex-col px-6 py-8'>
-        <p className='text-XL/Bold pb-6 text-start'>Category Type</p>
+        <p className='text-XL/Bold pb-6 text-start'>{title}</p>
         <ul className='flex gap-5 overflow-auto pb-5'>
-          {CATEGORY_TYPE.map((category, index) => {
-            const activeButton =
-              filterOptions.category === category
-                ? 'bg-grey-900 text-white'
-                : 'bg-white text-grey-800';
+          {options.map((option, index) => {
+            const _selectedOption = Array.isArray(target) ? target : [target];
+            const _option =
+              typeof option === 'number' ? option : firstLetterToUpper(option);
+            const activeButton = _selectedOption.includes(option)
+              ? 'bg-grey-900 text-white'
+              : 'bg-white text-grey-800';
             return (
               <li key={`category_type_${index}`}>
                 <button
-                  onClick={() =>
-                    updateFilteredOptions(filterOptions, setFilterOptions, {
-                      key: 'category',
-                      value: category as TFilterType['category'],
-                    })
-                  }
-                  className={`border-grey-400 w-[120px] shrink-0 rounded-[30px] border py-4 ${activeButton}`}
+                  onClick={() => callback(option)}
+                  className={`${
+                    icon ? 'flex items-center justify-center gap-3' : ''
+                  } border-grey-400 w-[110px] shrink-0 rounded-[30px] border py-4 ${activeButton}`}
                 >
-                  <p className='text-L/Medium'>{category}</p>
+                  {icon}
+                  <p className='text-S/Medium'>{_option}</p>
                 </button>
               </li>
             );

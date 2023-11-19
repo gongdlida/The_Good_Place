@@ -16,16 +16,16 @@ export const filledOption = (options: TFilterType) =>
 export const _initializeCatalogList = async (
   pagination: TPagination,
   setCatalogList: (catalogList: TCatalogStatus) => void,
-  filterOptions: TFilterType,
+  filterOptions?: TFilterType,
 ) => {
   const res = await getCatalogList();
 
-  const _option = filledOption(filterOptions);
+  const _option = filterOptions ? filledOption(filterOptions) : '';
 
   if (!res) return res; //에러
   const convertedList = convertFormatToNum(res.data!);
   const list = isTruthy(_option)
-    ? filterCatalogList(filterOptions, convertedList)
+    ? filterCatalogList(filterOptions!, convertedList)
     : convertedList;
 
   setCatalogList({ list: list!, printList: list!.slice(0, pagination.bundle) });
@@ -121,7 +121,7 @@ const getPrice = (catalogs: TCatalogInfo[]) => {
   return { max, min };
 };
 
-const convertFormatToNum = (catalogList: TCatalogInfo[]) =>
+export const convertFormatToNum = (catalogList: TCatalogInfo[]) =>
   catalogList.map((catalog) => {
     const _price = catalog.price as string;
     catalog.price = parseInt(_price.replace(',', '').split('.')[0]);
@@ -207,6 +207,7 @@ export const filteredListByCategory = async (
 ) => {
   const res = await getCatalogList();
   if (!res) return res; //에러
+
   const convertedList = convertFormatToNum(res.data!);
   const filteredList = convertedList.filter((catalog) => catalog.category === category);
   setCatalogList({

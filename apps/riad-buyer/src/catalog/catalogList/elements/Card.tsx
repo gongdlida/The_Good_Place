@@ -1,4 +1,4 @@
-import { handleImages } from '@/catalog/catalogList/container';
+import { firstLetterToUpper, handleImages } from '@/catalog/catalogList/container';
 import { useEffect, useState } from 'react';
 
 import { ReactSVG } from 'react-svg';
@@ -119,7 +119,7 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
             </div>
           </div>
           <p className='w-[300px] truncate'>{catalog.productName}</p>
-          <p>{catalog.roomType}</p>
+          <p>{firstLetterToUpper(catalog.roomType)}</p>
           <p className='text-M/Bold'>
             $ {formatNumber(catalog.price)}
             <span className='text-M/Regular'>/ night</span>

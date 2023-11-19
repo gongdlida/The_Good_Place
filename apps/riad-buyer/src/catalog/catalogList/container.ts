@@ -5,7 +5,7 @@ import isTruthy from '@/util/isTruthy';
 
 export const filledOption = (options: TFilterType) =>
   Object.entries(options).filter((filterOptions) => {
-    if (filterOptions[0] === 'price') return false;
+    if (['priceRange', 'price'].includes(filterOptions[0])) return false;
 
     return isTruthy(filterOptions[1]);
   });
@@ -109,15 +109,6 @@ const getUpdateFilteredOption = (
   return _ftOptions;
 };
 
-export const updateFilteredOptions = (
-  filterOptions: TFilterType,
-  setFilterOptions: (options: TFilterType) => void,
-  newOption: { key: keyof TFilterType; value: TFilterType[keyof TFilterType] },
-) => {
-  const _option = getUpdateFilteredOption(filterOptions, newOption);
-  setFilterOptions(_option);
-};
-
 const getPrice = (catalogs: TCatalogInfo[]) => {
   const prices = catalogs.map((catalog) =>
     parseInt(catalog.price.replace(',', '').split('.')[0]),
@@ -134,7 +125,7 @@ export const _getCatalogList = async (
   if (!res) return res; //에러
   _dispatch({ list: res.data, printList: res.data });
   const { max, min } = getPrice(res.data!);
-  INIT_FILTER_OPTIONS.price = { max, min };
+  INIT_FILTER_OPTIONS.priceRange = { max, min };
   setFilterOptions(INIT_FILTER_OPTIONS);
 };
 
@@ -155,11 +146,18 @@ const filterCatalogList = (filterOptions: TFilterType, catalogList: TCatalogInfo
 
   const { list } = [_catalogList].reduce(
     (pre: { list: TCatalogList; filter: any[] }, cur: TCatalogInfo[]) => {
-      const { filter } = pre;
-      const [key, value] = filter.pop() as keyof TFilterType;
-      if (['']) {
+      const [key, filteredKey] = pre.filter.pop() as keyof TFilterType;
+      const _list = pre.list === null ? cur : pre.list;
+
+      if (['grade', 'roomType'].includes(key)) {
+        pre.list = _list!.filter((catalog) =>
+          filteredKey.includes(catalog[key as keyof TCatalogInfo] as keyof TFilterType),
+        );
       } else {
-        pre.list = cur.filter((catalog) => catalog[key as keyof TFilterType] === value);
+        pre.list = _list!.filter(
+          (catalog) =>
+            catalog[key as keyof Omit<TFilterType, 'priceRange'>] === filteredKey,
+        );
       }
 
       return pre;
@@ -170,9 +168,25 @@ const filterCatalogList = (filterOptions: TFilterType, catalogList: TCatalogInfo
   return list;
 };
 
+export const updateFilteredOptions = (
+  filterOptions: TFilterType,
+  setFilterOptions: (options: TFilterType) => void,
+  newOption: { key: keyof TFilterType; value: TFilterType[keyof TFilterType] },
+  catalog?: TCatalogStatus,
+  setCatalog?: Dispatch<SetStateAction<TCatalogStatus>>,
+) => {
+  const _option = getUpdateFilteredOption(filterOptions, newOption);
+  setFilterOptions(_option);
+
+  if (catalog && setCatalog) {
+    const _list = newOption.key === 'category' ? catalog!.printList : catalog!.list;
+    const printList = filterCatalogList(_option, _list as TCatalogInfo[]);
+    setCatalog({ list: catalog.list, printList });
+  }
+};
+
 export const filteredListByCategory = async (
   category: TFilterType['category'],
-
   setCatalogList: (catalogList: TCatalogStatus) => void,
 ) => {
   const res = await getCatalogList();

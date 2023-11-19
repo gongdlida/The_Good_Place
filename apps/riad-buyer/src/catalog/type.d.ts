@@ -29,6 +29,7 @@ type TFilterType = {
   grade: Pick<TCatalogInfo, 'grade'>[] | null;
   roomType: Pick<TCatalogInfo, 'roomType'>[] | null;
   price: { min: number; max: number };
+  priceRange: { min: number; max: number }; // 기준
 };
 
 type TCategory = 'pension' | 'hotel' | 'hostel' | 'apartment' | 'villa' | 'guesthouse';

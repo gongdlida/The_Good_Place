@@ -9,6 +9,7 @@ import {
   clearFilteredOptions,
 } from '@/catalog/catalogList/container';
 import { useEffect, useState } from 'react';
+import { RangeSlider } from '@/catalog/catalogList/elements';
 
 export const FilterModal = () => {
   const [catalog, setCatalog] = useState<TCatalogStatus>({
@@ -48,18 +49,35 @@ export const FilterModal = () => {
           </div>
         </header>
 
-        <main>
-          <div className='max-h-[700px] max-w-[780px] divide-y-2 overflow-hidden px-6'>
+        <main className='overflow-hidden'>
+          <div className='max-h-[700px] max-w-[780px] divide-y-2 overflow-auto px-6'>
             <SelectButton
               title={'Category Type'}
               target={filterOptions.category}
               options={CATEGORY_TYPE}
               callback={(category: TFilterType['category']) =>
-                updateFilteredOptions(filterOptions, setFilterOptions, {
-                  key: 'category',
-                  value: category as TFilterType['category'],
-                })
+                updateFilteredOptions(
+                  filterOptions,
+                  setFilterOptions,
+                  {
+                    key: 'category',
+                    value: category as TFilterType['category'],
+                  },
+                  catalog,
+                  setCatalog,
+                )
               }
+            />
+            <RangeSlider
+              title='Price'
+              min={filterOptions.priceRange.min}
+              max={filterOptions.priceRange.max}
+              onChange={(value: { min: number; max: number }) => {
+                updateFilteredOptions(filterOptions, setFilterOptions, {
+                  key: 'price',
+                  value: value as TFilterType['price'],
+                });
+              }}
             />
             <SelectButton
               title={'Grade'}
@@ -74,10 +92,16 @@ export const FilterModal = () => {
               }
               options={GRADE}
               callback={(grade: TFilterType['grade']) =>
-                updateFilteredOptions(filterOptions, setFilterOptions, {
-                  key: 'grade',
-                  value: grade as TFilterType['grade'],
-                })
+                updateFilteredOptions(
+                  filterOptions,
+                  setFilterOptions,
+                  {
+                    key: 'grade',
+                    value: grade as TFilterType['grade'],
+                  },
+                  catalog,
+                  setCatalog,
+                )
               }
             />
             <SelectButton
@@ -85,10 +109,16 @@ export const FilterModal = () => {
               target={filterOptions.roomType}
               options={ROOM_TYPE}
               callback={(roomType: TFilterType['roomType']) =>
-                updateFilteredOptions(filterOptions, setFilterOptions, {
-                  key: 'roomType',
-                  value: roomType as TFilterType['roomType'],
-                })
+                updateFilteredOptions(
+                  filterOptions,
+                  setFilterOptions,
+                  {
+                    key: 'roomType',
+                    value: roomType as TFilterType['roomType'],
+                  },
+                  catalog,
+                  setCatalog,
+                )
               }
             />
           </div>

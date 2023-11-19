@@ -9,11 +9,11 @@ import {
 import { FilterModal } from '@/catalog/catalogList/elements';
 
 export const Filter = () => {
-  const { setFilterOptions, setIsModalOpen, filterOptions, setCatalogList, catalogList } =
+  const { setFilterOptions, setIsModalOpen, filterOptions, setCatalogList } =
     catalogStore();
 
   return (
-    <article className='border-grey-300 sticky top-[81px] z-30 flex w-full justify-center border-b-[1px] bg-white'>
+    <article className='border-grey-300 sticky top-[81px] z-[1] flex w-full justify-center border-b-[1px] bg-white'>
       <FilterModal />
       <div className='flex gap-20 py-3'>
         {CATEGORY_TYPE.map((category) => {

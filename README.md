@@ -35,18 +35,19 @@ $ pnpm start
     - 유틸리티 클래스로 css in js와 비교했을 때 CSS 렌더링이 더 빠르게 적용된다는 장점
     - css in js와 비교했을 때 관리하는 파일의 양과 번들링 사이즈가 상대적으로 감소
 
-- Routing - react-router-dom:</br>
-    - react-router-dom은 React 애플리케이션의 페이지 네비게이션을 쉽게 관리할 수 있는 라이브러리로, 라우팅을 구현하는 데 용이하다.
+- Routing - React-router-dom:</br>
+    - react-router-dom은 React 애플리케이션의 페이지 네비게이션을 쉽게 관리할 수 있는 라이브러리
+    - 라우트를 중첩하고 특정 라우트에 대한 보호 기능을 제공. 이를 통해 특정 조건이나 권한에 따라 페이지 액세스를 제어
 
 - Util - React-hook-form:</br>
-    - 상태 업데이트로 인한 불필요한 리렌더링을 줄여주는 역할
-    - React-hook-form은 간편하게 폼을 관리할 수 있는 라이브러리로, 높은 유연성과 성능을 제공하여 폼 상태와 유효성 검사를 간단하게 처리할 수 있다.
+    - 상태 업데이트로 인한 불필요한 리렌더링을 방지해주는 기능제공
+    - React-hook-form은 인라인으로 유효성 검사를 수행하고 에러를 처리하는 기능을 제공, 사용자 경험을 향상시키고 폼의 유효성을 간편하게 관리
 
 - Pre-commit hook validator - Husky:</br>
-- Husky는 Git의 pre-commit 훅을 이용하여 코드 커밋 전에 미리 정의된 작업을 실행할 수 있게 해주어 코드 품질을 유지하고 일관성을 유지가 가능
+    - Husky는 Git의 pre-commit 훅을 이용하여 코드 커밋 전에 미리 정의된 작업을 실행할 수 있게 해주어 코드 품질을 유지하고 일관성을 유지가 가능
 
 - Lint git commit subject - commitlint:</br>
-- commitlint는 커밋 메시지의 형식을 규정하여 일관된 커밋 로그를 유지하고, 프로젝트의 가독성과 협업을 용이
+    - commitlint는 커밋 메시지의 형식을 규정하여 일관된 커밋 로그를 유지하고, 프로젝트의 가독성과 협업을 용이
 
 
 ## 폴더 구조

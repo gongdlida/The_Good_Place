@@ -11,6 +11,7 @@ import user_info from '@/auth/fixtures/user.account.json';
 import { CACHING_KEY } from '@/api/constants';
 import { CatalogList } from '@/catalog/catalogList/CatalogList';
 import { CatalogDetail } from '@/catalog/catalogDetail/CatalogDetail';
+import ProtectedRoute from '@/components/ProtectRoute';
 
 const Router = () => {
   useEffect(() => {
@@ -33,11 +34,19 @@ const Router = () => {
     },
     {
       path: PATH.CATALOG_LIST,
-      element: <CatalogList />,
+      element: (
+        <ProtectedRoute>
+          <CatalogList />
+        </ProtectedRoute>
+      ),
     },
     {
       path: PATH.CATALOG_DETAIL,
-      element: <CatalogDetail />,
+      element: (
+        <ProtectedRoute>
+          <CatalogDetail />
+        </ProtectedRoute>
+      ),
     },
   ]);
   return elements;

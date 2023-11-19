@@ -10,6 +10,7 @@ import { useSessionStorage } from '@/api/useSessionStorage';
 import user_info from '@/auth/fixtures/user.account.json';
 import { CACHING_KEY } from '@/api/constants';
 import { CatalogList } from '@/catalog/catalogList/CatalogList';
+import { CatalogDetail } from '@/catalog/catalogDetail/CatalogDetail';
 
 const Router = () => {
   useEffect(() => {
@@ -33,6 +34,10 @@ const Router = () => {
     {
       path: PATH.CATALOG_LIST,
       element: <CatalogList />,
+    },
+    {
+      path: PATH.CATALOG_DETAIL,
+      element: <CatalogDetail />,
     },
   ]);
   return elements;

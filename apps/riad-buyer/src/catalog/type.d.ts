@@ -41,3 +41,10 @@ type TCatalogStatus = {
   list: TCatalogList;
   printList: TCatalogList;
 };
+
+type TFilterType = Pick<TCatalogInfo, 'category' | 'grade' | 'roomType' | 'price'>;
+
+type TCatalogDetail = {
+  catalogInfo: TCatalogInfo | null;
+  catalogList: TCatalogInfo[] | null;
+};

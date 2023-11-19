@@ -5,8 +5,11 @@ import isTruthy from '@/util/isTruthy';
 
 export const filledOption = (options: TFilterType) =>
   Object.entries(options).filter((filterOptions) => {
-    if (['priceRange', 'price'].includes(filterOptions[0])) return false;
-
+    if (['priceRange'].includes(filterOptions[0])) return false;
+    if (filterOptions[0] === 'price') {
+      const { max } = filterOptions[1] as TPrice;
+      return max !== 0;
+    }
     return isTruthy(filterOptions[1]);
   });
 
@@ -16,11 +19,14 @@ export const _initializeCatalogList = async (
   filterOptions: TFilterType,
 ) => {
   const res = await getCatalogList();
+
   const _option = filledOption(filterOptions);
 
   if (!res) return res; //에러
-
-  const list = isTruthy(_option) ? filterCatalogList(filterOptions, res.data!) : res.data;
+  const convertedList = convertFormatToNum(res.data!);
+  const list = isTruthy(_option)
+    ? filterCatalogList(filterOptions, convertedList)
+    : convertedList;
 
   setCatalogList({ list: list!, printList: list!.slice(0, pagination.bundle) });
 };
@@ -110,12 +116,17 @@ const getUpdateFilteredOption = (
 };
 
 const getPrice = (catalogs: TCatalogInfo[]) => {
-  const prices = catalogs.map((catalog) =>
-    parseInt(catalog.price.replace(',', '').split('.')[0]),
-  );
+  const prices = catalogs.map((catalog) => catalog.price) as number[];
   const [max, min] = [Math.max(...prices), Math.min(...prices)];
   return { max, min };
 };
+
+const convertFormatToNum = (catalogList: TCatalogInfo[]) =>
+  catalogList.map((catalog) => {
+    const _price = catalog.price as string;
+    catalog.price = parseInt(_price.replace(',', '').split('.')[0]);
+    return catalog;
+  });
 
 export const _getCatalogList = async (
   _dispatch: Dispatch<SetStateAction<TCatalogStatus>>,
@@ -123,48 +134,54 @@ export const _getCatalogList = async (
 ) => {
   const res = await getCatalogList();
   if (!res) return res; //에러
-  _dispatch({ list: res.data, printList: res.data });
-  const { max, min } = getPrice(res.data!);
+  const convertedList = convertFormatToNum(res.data!);
+
+  _dispatch({ list: convertedList, printList: convertedList });
+  const { max, min } = getPrice(convertedList!);
   INIT_FILTER_OPTIONS.priceRange = { max, min };
   setFilterOptions(INIT_FILTER_OPTIONS);
 };
 
 export const clearFilteredOptions = (
-  clearFilterOptions: Function,
   _dispatch: Dispatch<SetStateAction<TCatalogStatus>>,
   setFilterOptions: (options: TFilterType) => void,
 ) => {
   _getCatalogList(_dispatch, setFilterOptions);
-  clearFilterOptions();
 };
 
 const filterCatalogList = (filterOptions: TFilterType, catalogList: TCatalogInfo[]) => {
-  const _option = filledOption(filterOptions);
-  if (isTruthy(_option) === false) return catalogList;
+  const _filtered = filledOption(filterOptions);
+  if (isTruthy(_filtered) === false) return catalogList;
 
-  const _catalogList = structuredClone(catalogList) as TCatalogInfo[];
+  const { list } = _filtered.reduce(
+    (pre, cur) => {
+      const [key, value] = cur;
 
-  const { list } = [_catalogList].reduce(
-    (pre: { list: TCatalogList; filter: any[] }, cur: TCatalogInfo[]) => {
-      const [key, filteredKey] = pre.filter.pop() as keyof TFilterType;
-      const _list = pre.list === null ? cur : pre.list;
+      const _list = pre.list === null ? catalogList : pre.list;
 
-      if (['grade', 'roomType'].includes(key)) {
-        pre.list = _list!.filter((catalog) =>
-          filteredKey.includes(catalog[key as keyof TCatalogInfo] as keyof TFilterType),
-        );
+      if (['roomType', 'grade'].includes(key)) {
+        const _key = key as keyof TFilterType['roomType'] | keyof TFilterType['grade'];
+        pre.list = _list.filter((catalog) => {
+          const _value = value as
+            | Pick<TCatalogInfo, 'grade'>[]
+            | Pick<TCatalogInfo, 'roomType'>[];
+          return _value.includes(catalog[_key]);
+        });
+      } else if (key === 'price') {
+        const { min, max } = value as TPrice;
+
+        pre.list = _list.filter((catalog) => {
+          const price = catalog.price as number;
+          return min <= price && max >= price;
+        });
       } else {
-        pre.list = _list!.filter(
-          (catalog) =>
-            catalog[key as keyof Omit<TFilterType, 'priceRange'>] === filteredKey,
-        );
+        pre.list = _list.filter((catalog) => catalog.category === value);
       }
 
       return pre;
     },
-    { list: null, filter: _option },
+    { list: catalogList },
   );
-
   return list;
 };
 
@@ -179,8 +196,7 @@ export const updateFilteredOptions = (
   setFilterOptions(_option);
 
   if (catalog && setCatalog) {
-    const _list = newOption.key === 'category' ? catalog!.printList : catalog!.list;
-    const printList = filterCatalogList(_option, _list as TCatalogInfo[]);
+    const printList = filterCatalogList(_option, catalog!.list as TCatalogInfo[]);
     setCatalog({ list: catalog.list, printList });
   }
 };
@@ -191,18 +207,10 @@ export const filteredListByCategory = async (
 ) => {
   const res = await getCatalogList();
   if (!res) return res; //에러
-
-  const filteredList = res.data!.filter((catalog) => catalog.category === category);
+  const convertedList = convertFormatToNum(res.data!);
+  const filteredList = convertedList.filter((catalog) => catalog.category === category);
   setCatalogList({
     list: filteredList,
     printList: filteredList.slice(0, 20),
   });
 };
-
-// export const updateCatalogListByFilterOptions = (
-//   filterOptions: TFilterType,
-//   catalog: TCatalogStatus,
-// ) => {
-//   const Object.keys(filterOptions).filter((key) =>isTruthy(filterOptions[key as keyof TFilterType])
-//   );
-// };

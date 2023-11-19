@@ -110,7 +110,7 @@ export const CatalogDetail = () => {
                     id='item_price'
                     className='flex justify-between rounded-lg border border-orange-300 bg-orange-100 p-10'
                   >
-                    <div className='flex items-center gap-1'>
+                    <div className='flex items-center gap-2'>
                       <ReactSVG src='/assets/icons/Bed.svg' />
                       <p className='text-2XL/Medium'>
                         {firstLetterToUpper(catalogInfo.roomType)}

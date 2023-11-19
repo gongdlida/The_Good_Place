@@ -83,7 +83,10 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
             <ReactSVG
               src='/assets/icons/Tab.svg'
               beforeInjection={(svg) =>
-                svg.setAttribute('class', 'w-[30px] h-[30px] bg-white rounded-full')
+                svg.setAttribute(
+                  'class',
+                  'w-[30px] h-[30px] bg-white rounded-full shadow-[2px_2px_6px_rgba(0,0,0,0.1)]',
+                )
               }
             />
           </button>
@@ -97,7 +100,7 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
               beforeInjection={(svg) => {
                 svg.setAttribute(
                   'class',
-                  'w-[30px] h-[30px] rotate-180 bg-white rounded-full',
+                  'w-[30px] h-[30px] rotate-180 bg-white rounded-full shadow-[2px_2px_6px_rgba(0,0,0,0.1)]',
                 );
               }}
             />

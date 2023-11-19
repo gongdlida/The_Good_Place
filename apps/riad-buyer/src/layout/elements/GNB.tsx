@@ -42,7 +42,15 @@ export const GNB = () => {
           </button>
 
           <Link to={PATH.MAIN}>
-            <p className='text-3XL/Bold'>여기는 로고자리 입니다.</p>
+            <div className='flex items-center gap-1'>
+              <ReactSVG
+                src='/assets/icons/Location.svg'
+                beforeInjection={(svg) =>
+                  svg.setAttribute('class', 'fill-orange-300 w-8 h-8')
+                }
+              />
+              <p className='text-3XL/Bold text-orange-400'>The Good Place</p>
+            </div>
           </Link>
 
           <div className='absolute right-0'>
@@ -55,7 +63,7 @@ export const GNB = () => {
                   <li
                     className='text-S/Regular cursor-pointer px-4 py-3 text-red-700'
                     onClick={() => {
-                      useSessionStorage.clearStorage();
+                      useSessionStorage.removeItem(CACHING_KEY.USER_INFO);
                       setisOpenMenu(false);
                       navigator(PATH.MAIN);
                     }}
@@ -68,10 +76,17 @@ export const GNB = () => {
             {isTruthy(userInfo) ? (
               <button
                 onClick={() => (isOpenMenu ? setisOpenMenu(false) : setisOpenMenu(true))}
-                className='border-grey-200 flex h-10 w-[100px] items-center gap-2 rounded-lg border px-2'
+                className='border-grey-300 flex h-10 max-w-[200px] items-center gap-2 rounded-lg border px-2'
               >
-                <img src='/assets/imgs/Avartar.png' className='h-7 w-7' />
-                <p className='text-L/Medium'>{userInfo.name}</p>
+                <ReactSVG
+                  src='/assets/icons/Smile.svg'
+                  beforeInjection={(svg) =>
+                    svg.setAttribute('class', 'w-7 h-7 fill-orange-300')
+                  }
+                />
+                <p className='text-M/Medium text-grey-800 min-w-[70px] max-w-[150px] truncate'>
+                  {userInfo.name}
+                </p>
               </button>
             ) : (
               <div className='flex gap-5'>

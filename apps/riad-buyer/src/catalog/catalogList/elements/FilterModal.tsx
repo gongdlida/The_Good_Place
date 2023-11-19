@@ -80,8 +80,9 @@ export const FilterModal = ({ category = '' }: IFilterModal) => {
             />
             <RangeSlider
               title='Price'
-              min={filterOptions.priceRange.min}
-              max={filterOptions.priceRange.max}
+              rangePrice={filterOptions.priceRange}
+              min={filterOptions.price.min || filterOptions.priceRange.min}
+              max={filterOptions.price.max || filterOptions.priceRange.max}
               onChange={(value: { min: number; max: number }) =>
                 updateFilteredOptions(
                   filterOptions,

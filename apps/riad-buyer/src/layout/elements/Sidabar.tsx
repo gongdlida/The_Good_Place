@@ -29,7 +29,7 @@ export const Sidebar = ({ isOpenSidebar, setIsOpenSidebar }: ISidebar) => {
                   }}
                 />
               </button>
-              <p className='text-XL/Bold'>로고들어감</p>
+              <p className='text-XL/Bold text-orange-400'>The Good Place</p>
             </div>
           </header>
         </div>

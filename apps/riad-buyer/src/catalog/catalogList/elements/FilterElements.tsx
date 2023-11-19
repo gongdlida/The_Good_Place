@@ -18,7 +18,7 @@ export const SelectButton = ({
 }: ISelectButton) => {
   return (
     <section>
-      <div className='flex flex-col px-6 py-8'>
+      <div className='flex flex-col px-6 py-5'>
         <p className='text-XL/Bold pb-6 text-start'>{title}</p>
         <ul className='flex gap-5 overflow-auto pb-5'>
           {options.map((option, index) => {

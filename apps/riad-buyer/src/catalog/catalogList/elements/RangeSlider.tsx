@@ -7,13 +7,14 @@ interface IRangeSlider {
   max: number;
   onChange: Function;
   title: string;
+  rangePrice: TPrice;
 }
 
-export const RangeSlider = ({ min, max, onChange, title }: IRangeSlider) => {
+export const RangeSlider = ({ min, max, onChange, title, rangePrice }: IRangeSlider) => {
   const [minVal, setMinVal] = useState(min);
   const [maxVal, setMaxVal] = useState(max);
-  const minValRef = useRef(min);
-  const maxValRef = useRef(max);
+  const minValRef = useRef(rangePrice.min);
+  const maxValRef = useRef(rangePrice.max);
 
   const range = useRef<HTMLDivElement>(null);
 
@@ -46,13 +47,13 @@ export const RangeSlider = ({ min, max, onChange, title }: IRangeSlider) => {
 
   return (
     <section>
-      <div className='flex flex-col px-6 py-8'>
-        <p className='text-XL/Bold pb-6 text-start'>{title}</p>
+      <div className='flex flex-col px-6 py-7'>
+        <p className='text-XL/Bold text-start'>{title}</p>
         <div className='flex w-full items-center justify-center p-8'>
           <input
             type='range'
-            min={min}
-            max={max}
+            min={rangePrice.min}
+            max={rangePrice.max}
             value={minVal}
             onChange={(event) => {
               const value = Math.min(Number(event.target.value), maxVal - 1);
@@ -64,8 +65,8 @@ export const RangeSlider = ({ min, max, onChange, title }: IRangeSlider) => {
           />
           <input
             type='range'
-            min={min}
-            max={max}
+            min={rangePrice.min}
+            max={rangePrice.max}
             value={maxVal}
             onChange={(event) => {
               const value = Math.max(Number(event.target.value), minVal + 1);

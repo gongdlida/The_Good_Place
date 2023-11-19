@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "email": "felicette0@gamil.com",
+      "password": "1q2w3e4r!",
+      "name": "cat",
+      "phoneNumber": "010-1111-2222",
+      "businessNumber": "121-12-10111"
+    },
+    {
+      "email": "test0@naver.com",
+      "password": "1234qwer!",
+      "name": "dog",
+      "phoneNumber": "010-2222-3333",
+      "businessNumber": "111-21-10111"
+    },
+    {
+      "email": "rhino@gamil.com",
+      "password": "1q2w3e4r!",
+      "name": "rihno",
+      "phoneNumber": "010-3333-4444",
+      "businessNumber": "101-03-102211"
+    }
+  ]
+}

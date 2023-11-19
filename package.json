@@ -5,9 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buyer:setting": "pnpm run --filter=vite --filter=riad-buyer preset",
-    "buyer:dev": "pnpm buyer:setting && pnpm run --filter=vite --filter=riad-buyer dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "buyer:setting": "pnpm run --filter=riad-buyer preset",
+    "start": "pnpm buyer:setting && pnpm run --filter=riad-buyer dev",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -24,5 +23,8 @@
   },
   "engines": {
     "node": ">=16.0.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

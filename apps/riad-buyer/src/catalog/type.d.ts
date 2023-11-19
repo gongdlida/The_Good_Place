@@ -25,3 +25,8 @@ type TCatalogFetchStatus = {
 type TPagination = { bundle: number; page: number };
 
 type TFilterType = Pick<TCatalogInfo, 'category' | 'grade' | 'roomType' | 'price'>;
+
+type TCatalogDetail = {
+  catalogInfo: TCatalogInfo | null;
+  catalogList: TCatalogInfo[] | null;
+};

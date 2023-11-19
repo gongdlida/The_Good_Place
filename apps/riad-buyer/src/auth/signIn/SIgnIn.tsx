@@ -30,7 +30,8 @@ export const SignIn = () => {
 
   useEffect(() => {
     // 로그인 구현을 위한 데이터 삽입
-    useSessionStorage.setItem(CACHING_KEY.ALL_USERS, user_info);
+    const users = useSessionStorage.getItem(CACHING_KEY.ALL_USERS);
+    if (users === null) useSessionStorage.setItem(CACHING_KEY.ALL_USERS, user_info);
   }, []);
 
   return (

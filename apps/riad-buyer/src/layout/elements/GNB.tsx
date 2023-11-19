@@ -63,7 +63,7 @@ export const GNB = () => {
                   <li
                     className='text-S/Regular cursor-pointer px-4 py-3 text-red-700'
                     onClick={() => {
-                      useSessionStorage.clearStorage();
+                      useSessionStorage.removeItem(CACHING_KEY.USER_INFO);
                       setisOpenMenu(false);
                       navigator(PATH.MAIN);
                     }}
@@ -76,7 +76,7 @@ export const GNB = () => {
             {isTruthy(userInfo) ? (
               <button
                 onClick={() => (isOpenMenu ? setisOpenMenu(false) : setisOpenMenu(true))}
-                className='border-grey-300 flex h-10 max-w-[200px] items-center rounded-lg border px-2'
+                className='border-grey-300 flex h-10 max-w-[200px] items-center gap-2 rounded-lg border px-2'
               >
                 <ReactSVG
                   src='/assets/icons/Smile.svg'

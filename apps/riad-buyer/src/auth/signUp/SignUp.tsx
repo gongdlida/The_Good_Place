@@ -230,7 +230,8 @@ export const SignUp = () => {
           className='btn-xl-submit-outlined w-full'
           onClick={() => {
             const userInfo = getValues();
-            checkFilledForm(userInfo) && _signUp(userInfo, setError, setFocus, navigator);
+            checkFilledForm(userInfo, setError, setValue) &&
+              _signUp(userInfo, setError, setFocus, navigator);
           }}
         >
           회원가입

@@ -1,12 +1,13 @@
+import { handleImages } from '@/catalog/catalogList/container';
 import { useEffect, useState } from 'react';
-import { handleImages } from '@/catalog/catalogList/elements/container';
+
 import { ReactSVG } from 'react-svg';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
 
 interface ICard {
   catalog: TCatalogInfo;
-  type?: 'list' | 'detail' | 'recommand';
+  type?: 'list' | 'detail';
 }
 
 export const Card = ({ catalog, type = 'list' }: ICard) => {
@@ -14,7 +15,7 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
 
   const [currentImage, setCurrentImage] = useState(0);
   const [tabDisplay, setTabDisplay] = useState<'flex' | 'hidden'>('hidden');
-  const isListType = ['list', 'recommand'].includes(type);
+  const isListType = type === 'list';
   const cardImgStyle = isListType ? 'h-[300px] w-[310px]' : 'h-[700px] w-[700px] border';
 
   const images = isListType
@@ -26,18 +27,14 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
 
   useEffect(() => {
     setCurrentImage(0);
-    setTabDisplay('hidden');
   }, [catalog.Id]);
 
   return (
     <div
       id='catalog_card_frame'
       className={`flex w-fit flex-col gap-3 ${isListType ? 'cursor-pointer' : ''}`}
-      //TODO: container로 넣기
       onClick={() => {
-        if (isListType === false) return;
-
-        navigator(`${PATH.CATALOG_LIST}/${catalog.Id}`);
+        if (isListType) navigator(`${PATH.CATALOG_LIST}/${catalog.Id}`);
       }}
     >
       <div
@@ -69,6 +66,7 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
             );
           })}
         </div>
+
         {isListType === false && (
           <div className='bg-grey-700 absolute bottom-4 right-0 mr-2.5 rounded-md bg-opacity-60'>
             <p className='text-grey-200 text-S/Regular px-4'>{`${currentImage + 1} / ${
@@ -76,9 +74,9 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
             }`}</p>
           </div>
         )}
+
         <div className={`absolute w-full justify-between px-3 opacity-75 ${tabDisplay}`}>
           <button
-            className=''
             onClick={(event) => handleImages(setCurrentImage, images, 'prev', event)}
           >
             <ReactSVG
@@ -106,12 +104,25 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
         </div>
       </div>
       {isListType && (
-        <ul id='catalog_info' className='text-M/Regular flex flex-col'>
-          <li className='w-[300px] truncate'>{catalog.hotel}</li>
-          <li className='w-[300px] truncate'>{catalog.productName}</li>
-          <li>{catalog.roomType}</li>
-          <li className='text-M/Bold'>${catalog.price} /박</li>
-        </ul>
+        <div id='catalog_info' className='text-M/Regular flex flex-col'>
+          <div className='flex justify-between'>
+            <p className='w-[270px] truncate'>{catalog.hotel}</p>
+            <div className='flex items-center gap-0.5'>
+              <ReactSVG
+                src='/assets/icons/Star.svg'
+                beforeInjection={(svg) =>
+                  svg.setAttribute('class', 'fill-grey-600 w-4 h-4')
+                }
+              />
+              <p>{catalog.grade}</p>
+            </div>
+          </div>
+          <p className='w-[300px] truncate'>{catalog.productName}</p>
+          <p>{catalog.roomType}</p>
+          <p className='text-M/Bold'>
+            ${catalog.price} <span className='text-M/Regular'>/ night</span>
+          </p>
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-// import reactLogo from './assets/react.svg';
 import { Carousel } from '@/home/elements/Carousel';
 import { DATA } from '@/home/constants';
 import Layout from '@/layout/Layout';
@@ -17,7 +16,7 @@ function Main() {
 
   return (
     <Layout>
-      <article className='flex justify-center'>
+      <article className='flex justify-center pb-20'>
         <section className='flex w-[1330px] flex-col gap-20 pt-12'>
           <div className='flex w-full gap-[25px]'>
             {DATA.map((catalog) => {
@@ -28,7 +27,7 @@ function Main() {
                     src={catalog.representativeImage}
                   />
                   <Link to={`${PATH.CATALOG_LIST}/${catalog.Id}`}>
-                    <button className='btn-xl-submit-filled text-grey-800 absolute bottom-9 left-4 bg-white py-2 opacity-80'>
+                    <button className='btn-xl-submit-filled text-grey-900 text-L/Medium absolute bottom-9 left-4 bg-white py-2 opacity-80'>
                       Show more
                     </button>
                   </Link>

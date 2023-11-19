@@ -25,9 +25,9 @@ export const Filter = () => {
   }, []);
 
   return (
-    <article className='border-grey-300 sticky top-[81px] z-[1] flex w-full justify-center border-b-[1px] bg-white'>
+    <article className='border-grey-300 sticky top-[81px] z-[1] flex w-full items-center justify-center border-b-[1px] bg-white'>
       <FilterModal category={category} />
-      <div className='flex gap-20 py-3'>
+      <div className='relative flex w-[1330px] justify-center gap-20 py-3'>
         {CATEGORY_TYPE.map((categoryList) => {
           const currnetCategory =
             category === categoryList
@@ -58,7 +58,7 @@ export const Filter = () => {
           );
         })}
 
-        <div className='absolute right-[370px] flex gap-5'>
+        <div className='absolute right-0 flex gap-5'>
           <button
             className='border-grey-400 flex items-center gap-2 rounded-2xl border p-3'
             onClick={() => setIsModalOpen(true)}

@@ -26,7 +26,7 @@ export const Filter = () => {
 
   return (
     <article className='border-grey-300 sticky top-[81px] z-[1] flex w-full items-center justify-center border-b-[1px] bg-white'>
-      <FilterModal category={category} />
+      <FilterModal />
       <div className='relative flex w-[1330px] justify-center gap-20 py-3'>
         {CATEGORY_TYPE.map((categoryList) => {
           const currnetCategory =

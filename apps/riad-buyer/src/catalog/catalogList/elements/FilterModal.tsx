@@ -11,11 +11,7 @@ import {
 } from '@/catalog/catalogList/container';
 import { RangeSlider } from '@/catalog/catalogList/elements';
 
-interface IFilterModal {
-  category?: '' | Pick<TCatalogInfo, 'category'>;
-}
-
-export const FilterModal = ({ category = '' }: IFilterModal) => {
+export const FilterModal = () => {
   const [catalog, setCatalog] = useState<TCatalogStatus>({
     list: null,
     printList: null,
@@ -26,17 +22,6 @@ export const FilterModal = ({ category = '' }: IFilterModal) => {
 
   useEffect(() => {
     if (catalog.list === null) _getCatalogList(setCatalog, setFilterOptions);
-    if (category !== '')
-      updateFilteredOptions(
-        filterOptions,
-        setFilterOptions,
-        {
-          key: 'category',
-          value: category as TFilterType['category'],
-        },
-        catalog,
-        setCatalog,
-      );
   }, []);
 
   return (

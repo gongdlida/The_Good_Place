@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useInterval } from '@/hooks/useInterval';
+import useInterval from '@/hooks/useInterval';
 import { ReactSVG } from 'react-svg';
 import { handleImages } from '@/home/container';
 

@@ -16,4 +16,5 @@ export const INIT_FILTER_OPTIONS = {
   grade: null,
   roomType: null,
   price: { min: 0, max: 0 },
+  priceRange: { min: 0, max: 0 },
 };

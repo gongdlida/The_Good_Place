@@ -22,7 +22,7 @@ export const useSessionStorage = {
       return storedItem;
     }
   },
-  initializeItems: (): void => {
+  clearStorage: (): void => {
     sessionStorage.clear();
   },
 };

@@ -5,20 +5,12 @@ import { SignIn, SignUp } from '@/auth';
 
 import { useRoutes } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
-import { useEffect } from 'react';
-import { useSessionStorage } from '@/api/useSessionStorage';
-import user_info from '@/auth/fixtures/user.account.json';
-import { CACHING_KEY } from '@/api/constants';
+
 import { CatalogList } from '@/catalog/catalogList/CatalogList';
 import { CatalogDetail } from '@/catalog/catalogDetail/CatalogDetail';
 import ProtectedRoute from '@/components/ProtectRoute';
 
 const Router = () => {
-  useEffect(() => {
-    // 로그인 구현을 위한 데이터 삽입
-    useSessionStorage.setItem(CACHING_KEY.ALL_USERS, user_info);
-  }, []);
-
   const elements = useRoutes([
     {
       path: PATH.MAIN,

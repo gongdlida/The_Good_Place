@@ -1,0 +1,130 @@
+export const IMG = [
+  'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/1.jpeg',
+  'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/3.jpeg',
+  'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/6.jpeg',
+  'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/4.jpeg',
+];
+
+export const DATA = [
+  {
+    Id: '6548763c92b42fe6e2b72724',
+    productName: 'irure ex ut voluptate',
+    category: 'hotel',
+    grade: 2,
+    phone: '02-0000-7217',
+    email: 'bentonweber@zilladyne.com',
+    address: '471 Scholes Street, Homeland, Virgin Islands, 951',
+    roomType: 'tween',
+    price: '2,211.19',
+    currency: 'USD',
+    hotel: 'PACIFICHOTEL',
+    representativeImage:
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/1.jpeg',
+    description:
+      'Et nisi exercitation consectetur culpa velit cillum consectetur. Officia commodo voluptate do non. Magna laboris aliquip reprehenderit est tempor quis et eiusmod.\r\n',
+    images: [
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/10.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/20.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/25.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/2.jpeg',
+    ],
+  },
+  {
+    Id: '6548763c8ee2b6949272e435',
+    productName: 'eiusmod officia exercitation ut',
+    category: 'hostel',
+    grade: 5,
+    phone: '02-0000-8934',
+    email: 'bentonweber@zilladyne.com',
+    address: '835 Huntington Street, Brutus, North Dakota, 5543',
+    roomType: 'tween',
+    price: '2,640.37',
+    currency: 'USD',
+    hotel: 'WALKERHILLDOUGLASHOUSE',
+    representativeImage:
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/3.jpeg',
+    description:
+      'Velit aute sunt aute id dolore laborum nostrud voluptate exercitation eu pariatur et et qui. Ut pariatur excepteur ex laboris ut. Non dolor enim exercitation velit irure incididunt. Fugiat occaecat veniam velit qui do dolore et. Quis sit veniam laboris est eu aliqua eu adipisicing officia. Velit magna occaecat magna commodo labore aliqua Lorem aliqua eiusmod excepteur nulla et consequat culpa. Non adipisicing magna magna sunt et cillum elit non.\r\n',
+    images: [
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/6.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/13.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/17.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/12.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/19.jpeg',
+    ],
+  },
+  {
+    Id: '6548763c98cebfa760515556',
+    productName: 'id nostrud officia commodo',
+    category: 'apartment',
+    grade: 2,
+    phone: '02-0000-3197',
+    email: 'bentonweber@zilladyne.com',
+    address: '522 Ditmars Street, Sehili, Texas, 1699',
+    roomType: 'double',
+    price: '2,788.39',
+    currency: 'USD',
+    hotel: 'MAISONGLADJEJU',
+    representativeImage:
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/6.jpeg',
+    description:
+      'Laboris ea sit laborum nisi consectetur aute commodo exercitation nisi aliqua culpa eu culpa aute. Consectetur aliqua eiusmod occaecat nisi tempor proident aliqua id non sit anim in. Sunt reprehenderit mollit culpa sint do et et. Duis cillum duis do irure in quis est. Dolore ut ex laboris tempor aute elit culpa voluptate elit cillum nostrud. Voluptate duis voluptate Lorem deserunt amet id ullamco officia dolor in irure incididunt consectetur.\r\n',
+    images: [
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/22.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/17.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/14.jpeg',
+    ],
+  },
+  {
+    Id: '6548763c3270c0eaef535631',
+    productName: 'pariatur velit veniam sint',
+    category: 'hotel',
+    grade: 5,
+    phone: '02-0000-3944',
+    email: 'bentonweber@zilladyne.com',
+    address: '458 Nelson Street, Gibsonia, West Virginia, 654',
+    roomType: 'double',
+    price: '3,406.60',
+    currency: 'USD',
+    hotel: 'PLAYCECAMPJEJU',
+    representativeImage:
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/4.jpeg',
+    description:
+      'Tempor laboris ea consequat ut consequat reprehenderit labore ea elit veniam pariatur amet. Commodo voluptate reprehenderit occaecat irure nulla laborum mollit cupidatat amet ad nostrud et. Culpa occaecat velit pariatur eiusmod esse ullamco incididunt. Minim exercitation nulla consectetur sunt ad reprehenderit ad tempor consectetur Lorem pariatur enim. Velit occaecat dolore exercitation non Lorem veniam voluptate.\r\n',
+    images: [
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/12.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/17.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/21.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/16.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/8.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/13.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/22.jpeg',
+    ],
+  },
+  {
+    Id: '6548763ccbbecd2e75bed5a5',
+    productName: 'dolor mollit aute id',
+    category: 'villa',
+    grade: 5,
+    phone: '02-0000-2175',
+    email: 'bentonweber@zilladyne.com',
+    address: '161 Anna Court, Springdale, Iowa, 2405',
+    roomType: 'single',
+    price: '2,976.15',
+    currency: 'USD',
+    hotel: 'RYSE',
+    representativeImage:
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/exterior/10.jpeg',
+    description:
+      'Incididunt sunt consectetur est ex amet ut labore. Excepteur magna est aliqua elit proident. Consectetur aute ea ex amet enim voluptate aliqua sint qui deserunt sunt minim ea. Mollit est consectetur officia Lorem laboris velit tempor nisi sint qui labore ut occaecat. Do fugiat anim tempor duis excepteur.\r\n',
+    images: [
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/11.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/6.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/17.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/19.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/17.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/14.jpeg',
+      'https://tmp-riad.s3.ap-northeast-2.amazonaws.com/interior/23.jpeg',
+    ],
+  },
+];

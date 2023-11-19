@@ -1,28 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { ReactSVG } from 'react-svg';
 
 import { Sidebar } from '@/layout/elements';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
 
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
 import isTruthy from '@/util/isTruthy';
-
+import { closeTagByMouseDown } from '@/layout/container';
 export const GNB = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const userInfo = useSessionStorage.getItem(CACHING_KEY.USER_INFO);
+  const navigator = useNavigate();
+  const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+  const [isOpenMenu, setisOpenMenu] = useState(false);
+  const userInfo = useSessionStorage.getItem(CACHING_KEY.USER_INFO) as TUserInfo;
+  const menubarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.addEventListener('mousedown', (event) =>
+      closeTagByMouseDown(event, isOpenMenu, setisOpenMenu, menubarRef),
+    );
+    return () => {
+      document.removeEventListener('mousedown', (event) =>
+        closeTagByMouseDown(event, isOpenMenu, setisOpenMenu, menubarRef),
+      );
+    };
+  }, [isOpenMenu]);
 
   return (
     <header className='border-grey-300 fixed top-0 z-10 w-full border-b-[1px] bg-white'>
-      <Sidebar {...{ isOpen, setIsOpen }} />
+      <Sidebar {...{ isOpenSidebar, setIsOpenSidebar }} />
       <nav className='m-auto flex w-full max-w-[1330px]  justify-between py-5'>
         <div className='items-centerr relative flex w-full justify-center'>
           <button
             className='absolute left-0 h-10'
-            onClick={() => {
-              isOpen ? setIsOpen(false) : setIsOpen(true);
-            }}
+            onClick={() =>
+              isOpenSidebar ? setIsOpenSidebar(false) : setIsOpenSidebar(true)
+            }
           >
             <ReactSVG src='/assets/icons/Menu.svg' />
           </button>
@@ -32,17 +46,32 @@ export const GNB = () => {
           </Link>
 
           <div className='absolute right-0'>
+            {isOpenMenu && (
+              <div
+                ref={menubarRef}
+                className='absolute right-0 top-[52px] z-30 w-[208px] rounded-lg bg-white shadow-[0px_2px_41px_rgba(0,0,0,0.1)]'
+              >
+                <ul className=''>
+                  <li
+                    className='text-S/Regular cursor-pointer px-4 py-3 text-red-700'
+                    onClick={() => {
+                      useSessionStorage.clearStorage();
+                      setisOpenMenu(false);
+                      navigator(PATH.MAIN);
+                    }}
+                  >
+                    로그아웃
+                  </li>
+                </ul>
+              </div>
+            )}
             {isTruthy(userInfo) ? (
-              <button>
-                <div className='flex flex-col'>
-                  <div className='bg-grey-50 flex justify-center rounded-full border-[1px]'>
-                    <ReactSVG
-                      src='/assets/icons/Avartar.svg'
-                      beforeInjection={(svg) => svg.setAttribute('class', 'w-8 h-8')}
-                    />
-                  </div>
-                  <p>이준희</p>
-                </div>
+              <button
+                onClick={() => (isOpenMenu ? setisOpenMenu(false) : setisOpenMenu(true))}
+                className='border-grey-200 flex h-10 w-[100px] items-center gap-2 rounded-lg border px-2'
+              >
+                <img src='/assets/imgs/Avartar.png' className='h-7 w-7' />
+                <p className='text-L/Medium'>{userInfo.name}</p>
               </button>
             ) : (
               <div className='flex gap-5'>

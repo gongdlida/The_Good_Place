@@ -5,6 +5,11 @@ import { useForm } from 'react-hook-form';
 import { NOTIFICATION_MESSAGE } from '@/auth/constants';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useEffect } from 'react';
+import { useSessionStorage } from '@/api/useSessionStorage';
+import user_info from '@/auth/fixtures/user.account.json';
+import { CACHING_KEY } from '@/api/constants';
+
 import { REGEX_PATTERN } from '@/auth/constants';
 import { PATH } from '@/routes/constants';
 import { _signIn } from '@/auth/signIn/comtainer';
@@ -22,6 +27,11 @@ export const SignIn = () => {
   } = useForm<TSignInInfo>({
     mode: 'onChange',
   });
+
+  useEffect(() => {
+    // 로그인 구현을 위한 데이터 삽입
+    useSessionStorage.setItem(CACHING_KEY.ALL_USERS, user_info);
+  }, []);
 
   return (
     <form

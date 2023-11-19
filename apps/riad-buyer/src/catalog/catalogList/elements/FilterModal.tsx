@@ -17,13 +17,7 @@ export const FilterModal = () => {
     printList: null,
   });
 
-  const {
-    isModalOpen,
-    setIsModalOpen,
-    filterOptions,
-    setFilterOptions,
-    clearFilterOptions,
-  } = catalogStore();
+  const { isModalOpen, setIsModalOpen, filterOptions, setFilterOptions } = catalogStore();
 
   useEffect(() => {
     if (catalog.list === null) _getCatalogList(setCatalog, setFilterOptions);
@@ -72,12 +66,18 @@ export const FilterModal = () => {
               title='Price'
               min={filterOptions.priceRange.min}
               max={filterOptions.priceRange.max}
-              onChange={(value: { min: number; max: number }) => {
-                updateFilteredOptions(filterOptions, setFilterOptions, {
-                  key: 'price',
-                  value: value as TFilterType['price'],
-                });
-              }}
+              onChange={(value: { min: number; max: number }) =>
+                updateFilteredOptions(
+                  filterOptions,
+                  setFilterOptions,
+                  {
+                    key: 'price',
+                    value: value as TFilterType['price'],
+                  },
+                  catalog,
+                  setCatalog,
+                )
+              }
             />
             <SelectButton
               title={'Grade'}
@@ -126,11 +126,7 @@ export const FilterModal = () => {
 
         <footer className='border-grey-300 w-[780px] border-t-[1px]'>
           <div className='flex items-center justify-between px-6 py-4'>
-            <button
-              onClick={() =>
-                clearFilteredOptions(clearFilterOptions, setCatalog, setFilterOptions)
-              }
-            >
+            <button onClick={() => clearFilteredOptions(setCatalog, setFilterOptions)}>
               <p className='text-L/Medium underline'>Clear All</p>
             </button>
             <button className='btn-xl-submit-filled rounded-lg bg-orange-500 py-3'>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { ReactSVG } from 'react-svg';
 import { useNavigate } from 'react-router-dom';
 import { PATH } from '@/routes/constants';
+import formatNumber from '@/util/formatNumber';
 
 interface ICard {
   catalog: TCatalogInfo;
@@ -120,7 +121,8 @@ export const Card = ({ catalog, type = 'list' }: ICard) => {
           <p className='w-[300px] truncate'>{catalog.productName}</p>
           <p>{catalog.roomType}</p>
           <p className='text-M/Bold'>
-            ${catalog.price} <span className='text-M/Regular'>/ night</span>
+            $ {formatNumber(catalog.price)}
+            <span className='text-M/Regular'>/ night</span>
           </p>
         </div>
       )}

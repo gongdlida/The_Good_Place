@@ -7,7 +7,7 @@ type TCatalogInfo = {
   phone: string;
   email: string;
   address: string;
-  price: string;
+  price: string | number;
   currency: string;
   hotel: string;
   representativeImage: string;
@@ -28,9 +28,11 @@ type TFilterType = {
   category: Pick<TCatalogInfo, 'category'> | '';
   grade: Pick<TCatalogInfo, 'grade'>[] | null;
   roomType: Pick<TCatalogInfo, 'roomType'>[] | null;
-  price: { min: number; max: number };
-  priceRange: { min: number; max: number }; // 기준
+  price: TPrice;
+  priceRange: TPrice; // 기준
 };
+
+type TPrice = { min: number; max: number };
 
 type TCategory = 'pension' | 'hotel' | 'hostel' | 'apartment' | 'villa' | 'guesthouse';
 

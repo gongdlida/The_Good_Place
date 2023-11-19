@@ -31,7 +31,7 @@ export const Filter = () => {
                   key: 'category',
                   value,
                 });
-                filteredListByCategory(value, catalogList, setCatalogList);
+                filteredListByCategory(value, setCatalogList);
               }}
             >
               <ReactSVG

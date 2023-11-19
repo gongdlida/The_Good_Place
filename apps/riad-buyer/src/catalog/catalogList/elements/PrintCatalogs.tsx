@@ -22,7 +22,7 @@ export const PrintCatalogs = () => {
           isModalOpen ? 'h-[calc(100vh-162px)] overflow-hidden' : ''
         }`}
       >
-        <div className='flex grow flex-wrap gap-[30px] pt-[30px]'>
+        <div className='flex grow flex-wrap gap-[30px] self-start pt-[30px]'>
           {catalogList.printList!.map((catalog) => {
             return <Card key={catalog.Id} catalog={catalog} />;
           })}

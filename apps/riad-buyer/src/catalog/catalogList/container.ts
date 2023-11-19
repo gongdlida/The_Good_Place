@@ -22,7 +22,7 @@ export const _initializeCatalogList = async (
 
   const list = isTruthy(_option) ? filterCatalogList(filterOptions, res.data!) : res.data;
 
-  setCatalogList({ list: list!, printList: list!.slice(0, pagination.bundle + 1) });
+  setCatalogList({ list: list!, printList: list!.slice(0, pagination.bundle) });
 };
 
 export const firstLetterToUpper = (str: string) =>
@@ -51,7 +51,8 @@ export const updateByPagination = (
   const from = (page - 1) * bundle;
   const to = bundle;
 
-  const table = _catalogList.printList!.slice(from, to + 1);
+  const table = _catalogList.list!.splice(from, to);
+
   setCatalogList({ list: catalogList.list, printList: table });
 };
 
@@ -169,16 +170,18 @@ const filterCatalogList = (filterOptions: TFilterType, catalogList: TCatalogInfo
   return list;
 };
 
-export const filteredListByCategory = (
+export const filteredListByCategory = async (
   category: TFilterType['category'],
-  catalog: TCatalogStatus,
+
   setCatalogList: (catalogList: TCatalogStatus) => void,
 ) => {
-  const _list = structuredClone(catalog.list);
+  const res = await getCatalogList();
+  if (!res) return res; //에러
 
+  const filteredList = res.data!.filter((catalog) => catalog.category === category);
   setCatalogList({
-    list: catalog.list,
-    printList: _list!.filter((catalog) => catalog.category === category).slice(0, 20),
+    list: filteredList,
+    printList: filteredList.slice(0, 20),
   });
 };
 

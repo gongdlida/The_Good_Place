@@ -1,12 +1,8 @@
 import { NOTIFICATION_MESSAGE } from '@/auth/constants';
 import { useSessionStorage } from '@/api/useSessionStorage';
 import { CACHING_KEY } from '@/api/constants';
-import { URL } from '@/api/constants';
 
-const checkUserInfo = async (
-  url: string,
-  params: TSignUpInfo,
-): Promise<TResponseData> => {
+const checkUserInfo = async (params: TSignUpInfo): Promise<TResponseData> => {
   const userInfo = useSessionStorage.getItem(CACHING_KEY.ALL_USERS) as TUserInfoResponse;
   const _params = Object.assign({}, params) as TSignUpPayload;
   delete _params.passwordChecked;
@@ -34,7 +30,7 @@ const postUserInfo = (userInfo: TUserInfoResponse, _params: TSignUpPayload) => {
 
 export const signUp = async (params: TSignUpInfo) => {
   try {
-    return await checkUserInfo(URL.SIGN_UP, params);
+    return await checkUserInfo(params);
   } catch (error) {
     console.error(error);
     throw new Error('signIn');

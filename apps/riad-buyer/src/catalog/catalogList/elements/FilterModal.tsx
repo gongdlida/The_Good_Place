@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Modal } from '@/components/Modal';
 import { ReactSVG } from 'react-svg';
 import { catalogStore } from '@/catalog/store';
@@ -8,7 +9,6 @@ import {
   _getCatalogList,
   clearFilteredOptions,
 } from '@/catalog/catalogList/container';
-import { useEffect, useState } from 'react';
 import { RangeSlider } from '@/catalog/catalogList/elements';
 
 export const FilterModal = () => {

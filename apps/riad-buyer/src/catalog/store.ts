@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { INIT_FILTER_OPTIONS } from '@/catalog/constants';
+import { INIT_FILTER_OPTIONS, INIT_PAGINATION } from '@/catalog/constants';
 
 interface ICatalogStore {
   catalogList: TCatalogStatus;
@@ -23,7 +23,7 @@ export const catalogStore = create<ICatalogStore>((set, get) => ({
   catalogList: { list: null, printList: null },
   fetchStatus: { isLoading: false, error: null },
   printList: null,
-  pagination: { bundle: 20, page: 1 },
+  pagination: INIT_PAGINATION,
   setPagination: (page) => {
     const { pagination } = get();
     set({ pagination: Object.assign({}, pagination, { page }) });
@@ -45,5 +45,6 @@ export const catalogStore = create<ICatalogStore>((set, get) => ({
       catalogList: { list },
     } = get();
     set({ catalogList: { list, printList: list } });
+    set({ pagination: INIT_PAGINATION });
   },
 }));

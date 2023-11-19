@@ -18,3 +18,5 @@ export const INIT_FILTER_OPTIONS = {
   price: { min: 0, max: 0 },
   priceRange: { min: 0, max: 0 },
 };
+
+export const INIT_PAGINATION = { bundle: 20, page: 1 };

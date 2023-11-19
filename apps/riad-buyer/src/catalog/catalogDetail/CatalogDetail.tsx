@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { getCatalogInfo } from '@/catalog/catalogDetail/container';
 import { PATH } from '@/routes/constants';
 import { Spinner } from '@/components';
+import { firstLetterToUpper } from '@/catalog/catalogList/container';
+import formatNumber from '@/util/formatNumber';
 
 export const CatalogDetail = () => {
   const { id } = useParams();
@@ -110,9 +112,13 @@ export const CatalogDetail = () => {
                   >
                     <div className='flex items-center gap-1'>
                       <ReactSVG src='/assets/icons/Bed.svg' />
-                      <p className='text-2XL/Medium'>{catalogInfo.roomType}</p>
+                      <p className='text-2XL/Medium'>
+                        {firstLetterToUpper(catalogInfo.roomType)}
+                      </p>
                     </div>
-                    <p className='text-2XL/Medium'>$ {catalogInfo.price} / night</p>
+                    <p className='text-2XL/Medium'>
+                      $ {formatNumber(catalogInfo.price)} / night
+                    </p>
                   </div>
 
                   <div className='w-[590px]'>

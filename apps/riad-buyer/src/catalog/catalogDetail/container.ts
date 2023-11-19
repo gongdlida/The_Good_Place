@@ -3,6 +3,7 @@ import { PATH } from '@/routes/constants';
 import { INIT_CATALOG_DETAIL } from '@/catalog/catalogDetail/constants';
 import type { Dispatch, SetStateAction } from 'react';
 import type { NavigateFunction } from 'react-router-dom';
+import { convertFormatToNum } from '@/catalog/catalogList/container';
 
 export const getCatalogInfo = async (
   catalogId: string,
@@ -24,8 +25,9 @@ export const getCatalogInfo = async (
     navigator(PATH.CATALOG_LIST);
     return;
   }
+  const _catalogs = convertFormatToNum(catalogs.data);
 
-  const catalogList = catalogs.data
+  const catalogList = _catalogs
     .filter(
       (catalog) =>
         catalog.category === catalogInfo.category &&

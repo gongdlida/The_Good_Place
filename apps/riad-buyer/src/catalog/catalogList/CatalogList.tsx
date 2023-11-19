@@ -14,7 +14,7 @@ export const CatalogList = () => {
     if (pagination.page > 1) {
       setPagination(1);
     }
-  }, [filterOptions.category]);
+  }, []);
 
   return (
     <Layout>

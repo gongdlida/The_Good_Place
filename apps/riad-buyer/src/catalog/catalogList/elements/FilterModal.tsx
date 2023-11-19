@@ -11,16 +11,32 @@ import {
 } from '@/catalog/catalogList/container';
 import { RangeSlider } from '@/catalog/catalogList/elements';
 
-export const FilterModal = () => {
+interface IFilterModal {
+  category?: '' | Pick<TCatalogInfo, 'category'>;
+}
+
+export const FilterModal = ({ category = '' }: IFilterModal) => {
   const [catalog, setCatalog] = useState<TCatalogStatus>({
     list: null,
     printList: null,
   });
 
-  const { isModalOpen, setIsModalOpen, filterOptions, setFilterOptions } = catalogStore();
+  const { isModalOpen, setIsModalOpen, filterOptions, setFilterOptions, setCatalogList } =
+    catalogStore();
 
   useEffect(() => {
     if (catalog.list === null) _getCatalogList(setCatalog, setFilterOptions);
+    if (category !== '')
+      updateFilteredOptions(
+        filterOptions,
+        setFilterOptions,
+        {
+          key: 'category',
+          value: category as TFilterType['category'],
+        },
+        catalog,
+        setCatalog,
+      );
   }, []);
 
   return (
@@ -129,7 +145,15 @@ export const FilterModal = () => {
             <button onClick={() => clearFilteredOptions(setCatalog, setFilterOptions)}>
               <p className='text-L/Medium underline'>Clear All</p>
             </button>
-            <button className='btn-xl-submit-filled rounded-lg bg-orange-500 py-3'>
+            <button
+              className='btn-xl-submit-filled rounded-lg bg-orange-500 py-3'
+              onClick={() => {
+                const { printList } = catalog;
+                if (printList?.length !== 0)
+                  setCatalogList({ list: printList, printList: printList!.slice(0, 20) });
+                setIsModalOpen(false);
+              }}
+            >
               <p className='text-L/Medium'>
                 Show {catalog.printList?.length || 0} Places
               </p>

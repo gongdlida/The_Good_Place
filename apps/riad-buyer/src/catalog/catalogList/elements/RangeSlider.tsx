@@ -47,9 +47,9 @@ export const RangeSlider = ({ min, max, onChange, title, rangePrice }: IRangeSli
 
   return (
     <section>
-      <div className='flex flex-col px-6 py-7'>
+      <div className='flex flex-col px-6 py-10'>
         <p className='text-XL/Bold text-start'>{title}</p>
-        <div className='flex w-full items-center justify-center p-8'>
+        <div className='flex w-full items-center justify-center p-5'>
           <input
             type='range'
             min={rangePrice.min}
@@ -76,11 +76,11 @@ export const RangeSlider = ({ min, max, onChange, title, rangePrice }: IRangeSli
             className={`${rangeStyle} thumb z-[4]`}
           />
 
-          <div className='relative w-[500px]'>
-            <div className='absolute z-[1] h-[5px] w-full rounded-[3px] bg-orange-400' />
+          <div className='relative w-[500px] overflow-x-clip'>
+            <div className='absolute z-[1] h-[5px] w-[500px] rounded-[3px] bg-orange-400' />
             <div
               ref={range}
-              className='absolute z-[1] h-[5px] w-full rounded-[3px] bg-orange-400'
+              className='absolute z-[1] h-[5px] w-[500px] rounded-[3px] bg-orange-400'
             />
             <div className='text-M/Medium absolute left-0 mt-5'>
               $ {formatNumber(minVal)}

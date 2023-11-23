@@ -1,4 +1,4 @@
-# 리아드 코퍼레이션 프론트엔드 과제
+# The Good Place
 
 ## 설치, 실행 가이드
 - [`pnpm 모듈 패키지 설치`](https://pnpm.io/installation) 후 실행시켜주세요.
